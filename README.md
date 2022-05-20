@@ -2,31 +2,49 @@
 
 Movies Collection Manager allows you to choose your movies and put them in collections, share with friends and see which streaming services contain the movies.
 
+## Use Cases Implementations
+
+User can:
+
+- [ ] See a _movies_ list.
+- [ ] Search for _movies_ in the list.
+- [ ] Favorite a movie.
+- [ ] See a **Collection** list.
+- [ ] Create a **Collection** of movies.
+- [ ] Update a **Collection** of movies.
+- [ ] Delete a **Collection** of movies.
+- [ ] Select _movies_ and put into a **Collection** already created.
+- [ ] Remove _movies_ from a **Collection**.
+- [ ] Select _movies_ and put into a new **Collection**.
+- [ ] Share some **Collections** with friends.
+- [ ] See in which streaming services the movie is available.
+- [ ] Share a link to a _movie_.
+
 ## App Design
 
 https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node-id=51195%3A4667
 
 ## Simple Road Map
 
-- [ ] App Design in Material You Design
+- [x] App Design in Material You Design
 	- [ ] Mobile Design
-		- [ ] Smartphone design
+		- [x] Smartphone design
 		- [ ] Tablet design
 	- [ ] Desktop/TV Design
 
-- [ ] Architecture definition
-- [ ] Definition of Use Cases
-- [ ] Definition of Features
+- [x] Architecture (_Clean Arch_)
+- [X] Use Cases
 
 - [ ] Data Sources definition
 - [ ] Define model data to match the provided by the API
 - [ ] Infrastructure implementation and
 - [ ] Infrastructure Tests
+- [ ] Use Cases Implementation
 
 - [ ] Refactoring
-	- [ ] Dependency Injection
-	- [ ] Implementation of Functional Programming for Error Handling
-	- [ ] Implementation of Class Equality
+	- [ ] Dependency Injection (GetIt)
+	- [ ] Functional Programming for Error Handling (Dartz)
+	- [ ] Class Equality (Equatable)
 
 ### Controllers
 
@@ -60,13 +78,13 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 - [ ] Sign App
 - [ ] App Icon
 - [ ] Prepare Google Play Art
-- [.] Google Play Profile
+- [ ] Google Play Profile
 
 ## Future
 
 - [ ] Prepare Code for other platforms
   - [ ] Code for iOS
   - [ ] Code for Windows
-  - [.] Code for Linux
+  - [ ] Code for Linux
 
 - [ ] All the other things no planned yet
