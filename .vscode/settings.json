@@ -1,0 +1,18 @@
+{
+  "files.exclude": {
+    "**/.idea": true,
+    "**/.dart_tool": true,
+    "**/.metadata": true,
+    "**/.packages": true,
+    "**/RESOURCES": true,
+    "**/.vscode": true,
+    "**/build": true,
+    "**/lib_BACKUP": true,
+    "**/*.iml": true,
+    "*.flutter-plugins*": true,
+  },
+  "cSpell.enableFiletypes": [
+    "!yaml","!dart"
+  ],
+  "peacock.color": "#832561",
+}

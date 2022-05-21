@@ -1,0 +1,12 @@
+{
+  "@appTitle": {
+    "description": "Gerenciador de Coleções"
+  },
+  "account": "Conta",
+  "appTitle": "Gerenciador de Coleções",
+  "collections": "Coleções",
+  "movies": "Filmes",
+  "popularity": "Popularidade",
+  "ratting": "Avaliação",
+  "synopsis": "Sinopse"
+}

@@ -1,0 +1,24 @@
+{
+  "@appTitle": {
+    "description": "Movies List Manager"
+  },
+  "@collections": {
+    "description": "Bottom Navigation Bar Label"
+  },
+  "@movies": {
+    "description": "Bottom Navigation Bar Label"
+  },
+  "@popularity": {
+    "description": "Details Page Label"
+  },
+  "@ratting": {
+    "description": "Details Page Label"
+  },
+  "account": "Account",
+  "appTitle": "Movies List Manager",
+  "collections": "Collections",
+  "movies": "Movies",
+  "popularity": "Popularity",
+  "ratting": "Ratting",
+  "synopsis": "Synopsis"
+}

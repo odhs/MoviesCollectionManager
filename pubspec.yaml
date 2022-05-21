@@ -1,0 +1,38 @@
+name: movieapp
+description: A manager to movies collection.
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  # https://docs.flutter.dev/development/accessibility-and-localization/internationalization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0 
+  dio:
+  # Animation of a lottie file: https://lottiefiles.com/ 
+  lottie:
+  # Cache for the images
+  cached_network_image:
+  # Store the preferences and for while de API response
+  shared_preferences:
+  # Facilitates the try/catch 
+  dartz:
+  # Dependence Injection Service Locator
+  get_it:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
+  # Localizations
+  generate: true
+
+  assets:
+    - assets/

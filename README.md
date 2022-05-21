@@ -2,22 +2,24 @@
 
 Movies Collection Manager allows you to choose your movies and put them in collections, share with friends and see which streaming services contain the movies.
 
-## Use Cases Implementations
+## Use Cases 
 
 User can:
 
-- [ ] See a _movies_ list.
-- [ ] Search for _movies_ in the list.
+- [x] See a _movies_ list.
+- [x] Use a Search Bar to look for _movies_ in the list.
 - [ ] Favorite a movie.
+- [ ] See in which streaming services the movie is available to watch.
 - [ ] See a **Collection** list.
-- [ ] Create a **Collection** of movies.
-- [ ] Update a **Collection** of movies.
-- [ ] Delete a **Collection** of movies.
-- [ ] Select _movies_ and put into a **Collection** already created.
-- [ ] Remove _movies_ from a **Collection**.
-- [ ] Select _movies_ and put into a new **Collection**.
-- [ ] Share some **Collections** with friends.
-- [ ] See in which streaming services the movie is available.
+- [ ] Manage **Collections**
+  - [ ] Create a **Collection** of movies.
+  - [ ] Change **Collection** properties.
+  - [ ] Delete a **Collection**.
+- [ ] Edit **Collections**
+  - [ ] Select _movies_ and put into a **Collection** already created.
+  - [ ] Remove _movies_ from a **Collection**.
+  - [ ] Select _movies_ and put into a new **Collection**.
+- [ ] Share **Collections** with friends.
 - [ ] Share a link to a _movie_.
 
 ## App Design
@@ -35,10 +37,10 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 - [x] Architecture (_Clean Arch_)
 - [X] Use Cases
 
-- [ ] Data Sources definition
-- [ ] Define model data to match the provided by the API
-- [ ] Infrastructure implementation and
-- [ ] Infrastructure Tests
+- [x] Data Sources definition
+- [x] Define model data to match the provided by the API
+- [x] Infrastructure implementation and
+- [x] Infrastructure Tests
 - [ ] Use Cases Implementation
 
 - [ ] Refactoring
@@ -58,9 +60,12 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 ### Views
 
 - [ ] Implementation of screens
-	- [ ] Implementation of screen navigation
-	- [ ] Implementation of Breaking Points Layouts
-	- [ ] Implementation of Controllers
+	- [x] Screen navigation
+  - [X] Movies Page
+  - [-] Collections Page
+  - [-] Account Page
+	- [ ] Breaking Points Layouts
+	- [ ] Controllers
   
 - [ ] Implementation of Themes
 	
@@ -77,8 +82,8 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 
 - [ ] Sign App
 - [ ] App Icon
-- [ ] Prepare Google Play Art
-- [ ] Google Play Profile
+- [ ] Prepare _Google Play_ Art
+- [ ] _Google Play_ Profile
 
 ## Future
 
@@ -88,3 +93,11 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
   - [ ] Code for Linux
 
 - [ ] All the other things no planned yet
+
+## Todo Later
+
+- Refactor localization .arb files to a standard.
+
+## Known issues 
+
+- 
