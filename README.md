@@ -98,6 +98,7 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 ## Todo Later
 
 - Refactor localization .arb files to a standard.
+- ListTile in movies_page.dart is shrink
 
 ## Known issues 
 

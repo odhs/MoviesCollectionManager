@@ -31,14 +31,17 @@ class DetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 32),
             Text(
               "Synopsis",
               style: Theme.of(context).textTheme.titleLarge,
             ),
+            const SizedBox(height: 8),
             Text(
               movie.overview,
               style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
+              softWrap: true,
             ),
           ],
         ),
