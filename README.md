@@ -40,20 +40,21 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 - [x] Data Sources definition
 - [x] Define model data to match the provided by the API
 - [x] Infrastructure implementation and
-- [x] Infrastructure Tests
-- [ ] Use Cases Implementation
+- [ ] Infrastructure Tests
+- [X] Use Cases Implementation
+- [ ] Use Cases Test
 
 - [ ] Refactoring
-	- [ ] Dependency Injection (GetIt)
-	- [ ] Functional Programming for Error Handling (Dartz)
-	- [ ] Class Equality (Equatable)
+	- [X] Dependency Injection (_GetIt_)
+	- [X] Functional Programming for Error Handling (_Dartz_)
+	- [ ] Class Equality (_Equatable_)
 
 ### Controllers
 
 - [ ] Definition of States
 	- [ ] Implementation of States
-	- [ ] Implementation of Controllers
-	- [ ] Implementation of Services
+	- [X] Implementation of Controllers
+	- [X] Implementation of Services
 
 - [ ] Persistent local database
 
@@ -62,14 +63,14 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 - [ ] Implementation of screens
 	- [x] Screen navigation
   - [X] Movies Page
-  - [-] Collections Page
-  - [-] Account Page
+  - [X] Collections Page
+  - [X] Account Page
 	- [ ] Breaking Points Layouts
 	- [ ] Controllers
   
-- [ ] Implementation of Themes
+- [X] Implementation of Themes
 	
-- [ ] Internationalizing Texts
+- [X] Internationalizing Texts
 
 ### Tests
 
