@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 
 import 'app.dart';
@@ -6,8 +7,7 @@ import 'features/movies/presentation/controllers/settings_controller.dart';
 import 'features/movies/presentation/services/settings_service.dart';
 
 void main() async {
-
-  // Dependence Injection Service Locator 
+  // Dependence Injection Service Locator
   Inject.initialize();
 
   // Set up the SettingsController, which will glue user settings to multiple
@@ -21,5 +21,7 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+  Platform.isIOS
+      ? runApp(MyApp(settingsController: settingsController))
+      : runApp(MyApp(settingsController: settingsController));
 }

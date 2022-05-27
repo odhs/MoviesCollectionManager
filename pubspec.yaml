@@ -23,11 +23,16 @@ dependencies:
   dartz:
   # Dependence Injection Service Locator
   get_it:
+  tmdb_api: ^2.1.2
+  flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
+  flutter_modular: ^5.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true
