@@ -19,6 +19,13 @@ class GetMoviesLocalDataSourceDecoratorImp
   Future<Either<Exception, MovieEntity>> call() async {
     return (await super()).fold(
       (error) async {
+        if (await _isThereCache()) {
+          return Right(await _getInCache());
+        }
+        return Left(Exception("Nothing In Cache"));
+      },
+      /*
+      (error) async {
         return _isThereCache().then((value) async {
           // if there is saved cache return
           if (value) {
@@ -28,6 +35,7 @@ class GetMoviesLocalDataSourceDecoratorImp
           return Left(Exception("Nothing In Cache"));
         });
       },
+      */
       (result) {
         _saveInCache(result);
         return Right(result);
