@@ -6,8 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '/features/movies/presentation/ui/views/navigation_page.dart';
 import '/features/movies/presentation/ui/views/pages/account_page.dart';
-import 'features/movies/presentation/ui/views/pages/settings_view.dart';
-import 'features/movies/presentation/controllers/settings_controller.dart';
+import '/features/movies/presentation/ui/views/pages/settings_view.dart';
+import '/features/movies/presentation/controllers/settings_controller.dart';
 
 class AndroidApp extends StatelessWidget {
   const AndroidApp({
@@ -59,26 +59,11 @@ class AndroidApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-
           // TODO mover para pasta themes
           theme: ThemeData(
             useMaterial3: true,
             brightness: Brightness.light,
             colorSchemeSeed: Colors.lightBlue[900],
-            /*appBarTheme: const AppBarTheme(
-              systemOverlayStyle: SystemUiOverlayStyle.dark, // 2
-            ),*/
-            /*appBarTheme: AppBarTheme(
-              systemOverlayStyle: SystemUiOverlayStyle(
-                //statusBarColor: ThemeData.dark().appBarTheme.backgroundColor,
-                statusBarColor: Theme.of(context).colorScheme.background,
-                statusBarIconBrightness: Brightness.dark,
-                systemNavigationBarColor:
-                    Theme.of(context).colorScheme.onInverseSurface,
-                //ThemeData.dark().bottomAppBarColor,
-                systemNavigationBarIconBrightness: Brightness.dark,
-              ), // 2
-            ),*/
           ),
 
           // TODO mover para pasta themes
@@ -86,24 +71,8 @@ class AndroidApp extends StatelessWidget {
             useMaterial3: true,
             brightness: Brightness.dark,
             colorSchemeSeed: Colors.lightBlue[900],
-            /*appBarTheme: const AppBarTheme(
-              systemOverlayStyle: SystemUiOverlayStyle.light, // 2
-            ),*/
-            /*appBarTheme: AppBarTheme(
-              systemOverlayStyle: SystemUiOverlayStyle(
-                //statusBarColor: ThemeData.dark().appBarTheme.backgroundColor,
-                statusBarColor: Theme.of(context).colorScheme.background,
-                statusBarIconBrightness: Brightness.dark,
-                systemNavigationBarColor:
-                    Theme.of(context).colorScheme.onInverseSurface,
-                //ThemeData.dark().bottomAppBarColor,
-                systemNavigationBarIconBrightness: Brightness.light,
-              ), // 2
-            ),*/
           ),
-
           themeMode: settingsController.themeMode,
-         //home: const NavigationPage(),
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -111,16 +80,6 @@ class AndroidApp extends StatelessWidget {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
-                /*switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case PageNavigationView.routeName:
-                  default:
-                    return const PageNavigationView();
-                }*/
-
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return applyTheme(
@@ -146,19 +105,11 @@ class AndroidApp extends StatelessWidget {
   SystemUiOverlayStyle barTheme(BuildContext context) {
     return SystemUiOverlayStyle(
       // TOP: STATUS BAR
-      /* statusBarBrightness: Brightness.dark,
-    statusBarColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-    statusBarIconBrightness: Brightness.light,*/
       statusBarColor: Theme.of(context).colorScheme.background,
-      //statusBarColor: Theme.of(context).appBarTheme.foregroundColor,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
       // BOTTOM: NAVIGATION BAR
-      /*
-    systemNavigationBarColor:
-        Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-    systemNavigationBarIconBrightness: Brightness.dark,*/
       systemNavigationBarColor: Theme.of(context).colorScheme.onInverseSurface,
       systemNavigationBarIconBrightness:
           Theme.of(context).brightness == Brightness.dark

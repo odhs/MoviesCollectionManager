@@ -34,7 +34,7 @@ class _MoviesPageState extends State<MoviesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO drawer with Title, About, etc
+      // TODO develop the drawer with Title, About, etc
       drawer: Container(),
       body: SafeArea(
         child: CustomScrollView(slivers: [
@@ -102,50 +102,13 @@ class _MoviesPageState extends State<MoviesPage> {
               ),
             ),
           ),
-
-          /*
           SliverToBoxAdapter(
-            child: ValueListenableBuilder<MovieEntity?>(
-              valueListenable: _controller.movies,
-              builder: (__, movies, _) {
-                return Visibility(
-                  visible: movies != null,
-                  child: Container(
-                    height: 56.0,
-                    padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
-                    child: Container(
-                      decoration: ShapeDecoration(
-                        color: Theme.of(context).colorScheme.onInverseSurface,
-                        shape: const StadiumBorder(),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              onChanged: _controller.onChanged,
-                              decoration: const InputDecoration(
-                                icon: Icon(Icons.search_rounded),
-                                border: InputBorder.none,
-                                hintText: 'Search a movie',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          */
-          SliverToBoxAdapter(
-            // Glue the MoviesController in the ListView 
+            // Glue the MoviesController in the ListView
             child: ValueListenableBuilder<MovieEntity?>(
               valueListenable: _controller.movies,
               builder: (_, movies, __) {
                 return movies != null
+                    // TODO arranjar outra solução para ListView ter performance na memória
                     ? ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -154,31 +117,12 @@ class _MoviesPageState extends State<MoviesPage> {
                           movie: movies.listMovies[idx],
                         ),
                       )
-                      // Shows a loader
+                    // Shows a loader
                     : Lottie.asset('assets/lottie.json', repeat: true);
               },
             ),
           ),
-        ]
-/*
-              ValueListenableBuilder<MovieEntity?>(
-            valueListenable: _controller.movies,
-            builder: (_, movies, __) {
-              return movies != null
-                  ? SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        childCount: movies.listMovies.length,
-                        (BuildContext context, int index) {
-                          return CustomListCardWidget(
-                            movie: movies.listMovies[index],
-                          );
-                        },
-                      ),
-                    )
-                  : Lottie.asset('assets/lottie.json', repeat: true);
-            },
-          ),*/
-            ),
+        ]),
       ),
     );
   }

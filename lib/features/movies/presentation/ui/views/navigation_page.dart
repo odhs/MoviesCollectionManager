@@ -36,7 +36,6 @@ class _NavigationPageState extends State<NavigationPage> {
         ),
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
-            /*indicatorColor: Colors.blue.shade200,*/
             backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
           ),
           child: NavigationBar(
