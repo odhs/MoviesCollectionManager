@@ -22,6 +22,6 @@ void main() async {
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
   Platform.isIOS
-      ? runApp(MyApp(settingsController: settingsController))
-      : runApp(MyApp(settingsController: settingsController));
+      ? runApp(AndroidApp(settingsController: settingsController))
+      : runApp(AndroidApp(settingsController: settingsController));
 }

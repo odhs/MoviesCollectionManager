@@ -8,7 +8,9 @@ import '/features/movies/data/dtos/movie_dto.dart';
 import '/features/movies/domain/entities/movie_entity.dart';
 
 class GetMoviesRemoteDatasourceImp implements GetMoviesDataSource {
+  
   final HttpService _httpService;
+
   GetMoviesRemoteDatasourceImp(this._httpService);
 
   @override

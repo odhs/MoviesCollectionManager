@@ -9,8 +9,8 @@ import '/features/movies/presentation/ui/views/pages/account_page.dart';
 import 'features/movies/presentation/ui/views/pages/settings_view.dart';
 import 'features/movies/presentation/controllers/settings_controller.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({
+class AndroidApp extends StatelessWidget {
+  const AndroidApp({
     Key? key,
     required this.settingsController,
   }) : super(key: key);

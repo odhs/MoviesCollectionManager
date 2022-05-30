@@ -4,7 +4,9 @@ import '../../../domain/entities/movie_entity.dart';
 import '../get_movies_datasource.dart';
 
 class GetMoviesDataSourceDecorator implements GetMoviesDataSource {
+
   final GetMoviesDataSource _getMoviesDataSource;
+  
   GetMoviesDataSourceDecorator(this._getMoviesDataSource);
 
   @override
