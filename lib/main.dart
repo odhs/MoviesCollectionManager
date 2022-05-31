@@ -7,6 +7,10 @@ import 'features/movies/presentation/controllers/settings_controller.dart';
 import 'features/movies/presentation/services/settings_service.dart';
 
 void main() async {
+
+  // ensure that the application already loaded the widgets
+  WidgetsFlutterBinding.ensureInitialized();
+
   // Dependence Injection Service Locator
   Inject.initialize();
 
