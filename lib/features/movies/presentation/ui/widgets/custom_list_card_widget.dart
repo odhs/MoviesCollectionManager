@@ -14,7 +14,7 @@ class CustomListCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+    //var height = MediaQuery.of(context).size.height;
 
     return Material(
       child: GestureDetector(
@@ -30,36 +30,12 @@ class CustomListCardWidget extends StatelessWidget {
         child: Card(
           elevation: 1.0,
           margin: const EdgeInsets.all(8),
-          child: SizedBox(
-            height: height * .3,
+          child: AspectRatio(
+            aspectRatio: 3.5 / 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurStyle: BlurStyle.outer,
-                        color: Colors.black,
-                        spreadRadius: -50,
-                        blurRadius: 50,
-                        offset: Offset(30, 0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
-                    ),
-                    child: Hero(
-                      tag: movie.id,
-                      child: CachedNetworkImage(
-                        imageUrl: API.requestImg(movie.posterPath),
-                      ),
-                    ),
-                  ),
-                ),
+                movieCover(),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -74,9 +50,11 @@ class CustomListCardWidget extends StatelessWidget {
                         ),
                         Text(
                           movie.originalTitle.toString() +
-                              '(' +
+                              ' (' +
                               movie.releaseDate.substring(0, 4) +
                               ')',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const Spacer(),
                         dataRow(
@@ -89,14 +67,50 @@ class CustomListCardWidget extends StatelessWidget {
                           AppLocalizations.of(context)!.ratting,
                           movie.voteAverage.toString(),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Chip(
-                              avatar: Icon(Icons.chevron_right_rounded),
-                              label: Text("See more"),
-                            ),
-                          ],
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        /*
+                        SizedBox(
+                          width: double.infinity,
+                          child: Wrap(
+                            textDirection: TextDirection.rtl,
+                            direction: Axis.horizontal,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            alignment: WrapAlignment.end,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.star_border_outlined),
+                              ),
+                              Chip(
+                                avatar: const Icon(Icons.chevron_right_rounded),
+                                label:
+                                    Text(AppLocalizations.of(context)!.seeMore),
+                              ),
+                            ],
+                          ),
+                        ),
+                        */
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Wrap(
+                            textDirection: TextDirection.ltr,
+                            direction: Axis.horizontal,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            alignment: WrapAlignment.end,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.star_border_outlined),
+                              ),
+                              Chip(
+                                avatar: const Icon(Icons.chevron_right_rounded),
+                                label:
+                                    Text(AppLocalizations.of(context)!.seeMore),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -110,12 +124,41 @@ class CustomListCardWidget extends StatelessWidget {
     );
   }
 
+  Widget movieCover() {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurStyle: BlurStyle.outer,
+            color: Colors.black,
+            spreadRadius: -50,
+            blurRadius: 50,
+            offset: Offset(30, 0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(12),
+          bottomLeft: Radius.circular(12),
+        ),
+        child: Hero(
+          tag: movie.id,
+          child: CachedNetworkImage(
+            imageUrl: API.requestImg(movie.posterPath),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget dataRow(BuildContext context, String name, String value) {
     return Row(
       children: [
         Text(
           name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              fontWeight: FontWeight.bold, overflow: TextOverflow.fade),
         ),
         const SizedBox(
           width: 5.0,

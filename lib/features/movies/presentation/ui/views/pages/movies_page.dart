@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
@@ -68,9 +69,10 @@ class _MoviesPageState extends State<MoviesPage> {
                                   fontSize: 16,
                                 ),
                                 onChanged: _controller.onChanged,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Search a movie',
+                                  hintText: AppLocalizations.of(context)!
+                                      .searchAMovie,
                                 ),
                               ),
                             ),
@@ -110,6 +112,7 @@ class _MoviesPageState extends State<MoviesPage> {
                 return movies != null
                     // TODO arranjar outra solução para ListView ter performance na memória
                     ? ListView.builder(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: movies.listMovies.length,

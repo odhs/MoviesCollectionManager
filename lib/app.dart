@@ -11,6 +11,7 @@ import '/features/movies/presentation/controllers/settings_controller.dart';
 import 'core/themes/dark_theme.dart';
 import 'core/themes/light_theme.dart';
 
+
 class AndroidApp extends StatelessWidget {
   const AndroidApp({
     Key? key,
@@ -61,8 +62,8 @@ class AndroidApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: LightTheme.get(),
-          darkTheme: DarkTheme.get(),
+          theme: LightTheme.getTheme(),
+          darkTheme: DarkTheme.getTheme(),
           themeMode: settingsController.themeMode,
 
           // Define a function to handle named routes in order to support

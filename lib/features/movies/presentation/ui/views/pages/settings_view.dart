@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../controllers/settings_controller.dart';
 
@@ -49,30 +50,30 @@ class _SettingsViewState extends State<SettingsView> {
               DropdownMenuItem(
                 value: ThemeMode.system,
                 child: Row(
-                  children: const [
-                    Icon(Icons.settings),
-                    SizedBox(width: 8.0),
-                    Text('System Theme'),
+                  children: [
+                    const Icon(Icons.settings),
+                    const SizedBox(width: 8.0),
+                    Text(AppLocalizations.of(context)!.systemTheme),
                   ],
                 ),
               ),
               DropdownMenuItem(
                 value: ThemeMode.light,
                 child: Row(
-                  children: const [
-                    Icon(Icons.light_mode),
-                    SizedBox(width: 8.0),
-                    Text('Light Theme'),
+                  children:  [
+                    const Icon(Icons.light_mode),
+                    const SizedBox(width: 8.0),
+                    Text(AppLocalizations.of(context)!.lightTheme),
                   ],
                 ),
               ),
               DropdownMenuItem(
                 value: ThemeMode.dark,
                 child: Row(
-                  children: const [
-                    Icon(Icons.dark_mode),
-                    SizedBox(width: 8.0),
-                    Text('Dark Theme'),
+                  children:  [
+                    const Icon(Icons.dark_mode),
+                    const SizedBox(width: 8.0),
+                    Text(AppLocalizations.of(context)!.darkTheme),
                   ],
                 ),
               )

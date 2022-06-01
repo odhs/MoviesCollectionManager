@@ -26,7 +26,7 @@ User can:
 
 https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node-id=51195%3A4667
 
-## Simple Road Map
+## Simple Macro Road Map
 
 - [x] App Design in Material You Design
 	- [ ] Mobile Design

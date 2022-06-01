@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
 
-   static const routeName = '/accountPage';
+  static const routeName = '/accountPage';
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -30,13 +30,13 @@ class _AccountPageState extends State<AccountPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const ListTile(
-                        leading: CircleAvatar(
+                      ListTile(
+                        leading: const CircleAvatar(
                           backgroundImage: AssetImage('assets/avatar.jpg'),
                         ),
                         title: Text(
-                          "User Name",
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.username,
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.normal,
                           ),
@@ -44,7 +44,8 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       ListTile(
                           leading: const Icon(Icons.rate_review_outlined),
-                          title: const Text('Number of Comments'),
+                          title: Text(
+                              AppLocalizations.of(context)!.numberOfComments),
                           onTap: () {}),
                     ],
                   ),
@@ -67,15 +68,16 @@ class _AccountPageState extends State<AccountPage> {
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Premium User'),
-                        subtitle: Text("Account Type"),
+                      ListTile(
+                        leading: const Icon(Icons.person),
+                        title: const Text('Premium'),
+                        subtitle:
+                            Text(AppLocalizations.of(context)!.accountType),
                       ),
                       ListTile(
                         leading: const Icon(Icons.email),
                         title: const Text('email@example.com'),
-                        subtitle: const Text("email"),
+                        subtitle: Text(AppLocalizations.of(context)!.email),
                         onTap: () {
                           // EditUser()
                         },

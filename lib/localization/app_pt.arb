@@ -8,5 +8,14 @@
   "movies": "Filmes",
   "popularity": "Popularidade",
   "ratting": "Avaliação",
-  "synopsis": "Sinopse"
+  "numberOfComments": "Número de Comentários",
+  "accountType": "Tipo de Conta",
+  "synopsis": "Sinopsis",
+  "username": "Nome de Usuário",
+  "email": "Email",
+  "systemTheme": "Sistema",
+  "lightTheme": "Claro",
+  "darkTheme": "Escuro",
+  "seeMore": "Veja mais",
+  "searchAMovie": "Buscar um filme"
 }
