@@ -70,28 +70,6 @@ class CustomListCardWidget extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        /*
-                        SizedBox(
-                          width: double.infinity,
-                          child: Wrap(
-                            textDirection: TextDirection.rtl,
-                            direction: Axis.horizontal,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            alignment: WrapAlignment.end,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.star_border_outlined),
-                              ),
-                              Chip(
-                                avatar: const Icon(Icons.chevron_right_rounded),
-                                label:
-                                    Text(AppLocalizations.of(context)!.seeMore),
-                              ),
-                            ],
-                          ),
-                        ),
-                        */
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Wrap(
@@ -151,6 +129,7 @@ class CustomListCardWidget extends StatelessWidget {
       ),
     );
   }
+
 
   Widget dataRow(BuildContext context, String name, String value) {
     return Row(

@@ -11,14 +11,20 @@ void main() async {
   // ensure that the application already loaded the widgets
   WidgetsFlutterBinding.ensureInitialized();
 
+// Visual Density to provide touch or click depends on device
+/*
+  double densityAmt = touchMode ? 0.0 : -1.0;
+  VisualDensity density =
+  VisualDensity(horizontal: densityAmt, vertical: densityAmt);
+*/
+
   // Windows OS minimal size
   //Size size = await DesktopWindow.getWindowSize();
   //DesktopWindow.setWindowSize(Size(800,600));
   //DesktopWindow.setFullScreen(true);
   if (Platform.isWindows) {
-    DesktopWindow.setMaxWindowSize(await DesktopWindow.getWindowSize());
-    DesktopWindow.setMinWindowSize(const Size(400, 800));
     DesktopWindow.setWindowSize(const Size(400, 800));
+    DesktopWindow.setMinWindowSize(const Size(400, 800));
   }
 
   // Dependence Injection Service Locator

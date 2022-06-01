@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/core/themes/core_theme.dart';
 
-class DarkTheme implements CoreTheme {
+class DarkTheme extends CoreTheme {
 
   static getTheme() {
     return ThemeData(

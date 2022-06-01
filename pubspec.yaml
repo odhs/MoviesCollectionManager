@@ -23,11 +23,23 @@ dependencies:
   dartz:
   # Dependence Injection Service Locator
   get_it:
+  desktop_window: ^0.4.0
+  # flutter pub add window_manager
+  # Future Dependences:
+  # tmdb_api: ^2.1.2
+  # flutter_bloc: ^8.0.1
+  # equatable: ^2.0.3
+  # flutter_modular: ^5.0.2
+  # Organize translations, package from dart https://pub.dev/packages/intl_translation
+  # flutter pub add intl_translation
+  # To control min and max sizes in screen
+  # flutter pub add desktop_window
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true
@@ -36,3 +48,14 @@ flutter:
 
   assets:
     - assets/
+
+  fonts:
+  - family: GoogleSans
+    fonts:
+    - asset: fonts/GoogleSans-Regular.ttf
+  - family: Poppins
+    fonts:
+    - asset: fonts/Poppins-Regular.ttf
+  - family: Raleway
+    fonts:
+    - asset: fonts/Raleway-Regular.ttf

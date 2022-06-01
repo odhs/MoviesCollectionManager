@@ -52,3 +52,4 @@ app.*.map.json
 *.bat
 *.ps1
 /lib_BACKUP
+/RESOURCES

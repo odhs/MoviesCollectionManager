@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/core/themes/core_theme.dart';
 
-class LightTheme implements CoreTheme {
+class LightTheme extends CoreTheme {
 
   static getTheme() {
     return ThemeData(
