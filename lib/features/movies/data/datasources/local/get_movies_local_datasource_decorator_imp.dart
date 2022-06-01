@@ -18,7 +18,24 @@ class GetMoviesLocalDataSourceDecoratorImp
   @override
   Future<Either<Exception, MovieEntity>> call() async {
     return (await super()).fold(
-      (error) async => Right(await _getInCache()),
+      (error) async {
+        if (await _isThereCache()) {
+          return Right(await _getInCache());
+        }
+        return Left(Exception("Nothing In Cache"));
+      },
+      /*
+      (error) async {
+        return _isThereCache().then((value) async {
+          // if there is saved cache return
+          if (value) {
+            return Right(await _getInCache());
+          }
+          // if there is no cache, Exception
+          return Left(Exception("Nothing In Cache"));
+        });
+      },
+      */
       (result) {
         _saveInCache(result);
         return Right(result);
@@ -31,11 +48,18 @@ class GetMoviesLocalDataSourceDecoratorImp
     String jsonMovies = jsonEncode(movies.toJson());
     prefs.setString('movies_cache', jsonMovies);
     if (kDebugMode) {
-      print('salvou no cache os filmes' + jsonMovies);
+      print('Movies saved on cache' + jsonMovies);
     }
   }
 
-  // TODO bug fix when the first execution without a internet connection fails
+  Future<bool> _isThereCache() async {
+    var prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey("movies_cache")) {
+      return true;
+    }
+    return false;
+  }
+
   Future<MovieEntity> _getInCache() async {
     var prefs = await SharedPreferences.getInstance();
     var moviesJsonString = prefs.getString('movies_cache')!;
@@ -44,7 +68,6 @@ class GetMoviesLocalDataSourceDecoratorImp
     if (kDebugMode) {
       print('recuperou do cache os filmes ' + movies.toString());
     }
-
     return movies;
   }
 }
