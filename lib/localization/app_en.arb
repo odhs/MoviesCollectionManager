@@ -20,5 +20,17 @@
   "movies": "Movies",
   "popularity": "Popularity",
   "ratting": "Ratting",
-  "synopsis": "Synopsis"
+  "numberOfComments": "Number of Comments",
+  "accountType": "Account Type",
+  "synopsis": "Synopsis",
+  "username": "Username",
+  "email": "Email",
+  "systemTheme": "System",
+  "lightTheme": "Light",
+  "darkTheme": "Dark",
+  "@seeMore": {
+    "description": "Details page button in card See More"
+  },
+  "seeMore": "See more",
+  "searchAMovie": "Search a movie"
 }

@@ -16,7 +16,7 @@ THE MARVEL UNIVERSE LIST: 1
 OSCAR LIST: 2
 MY FAVORITE LIST: 8203067 (Needs autentication, the referring code has been removed)
 
-TODO Keep the bearer key in a safe place,
+TODO Keep the bearer key in a safe place,flutter pub add mocktail
 for now the key has been left here for testing purposes only. 
 
 Examples:

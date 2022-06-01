@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
@@ -6,8 +8,20 @@ import 'features/movies/presentation/controllers/settings_controller.dart';
 import 'features/movies/presentation/services/settings_service.dart';
 
 void main() async {
+  // ensure that the application already loaded the widgets
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // Dependence Injection Service Locator 
+  // Windows OS minimal size
+  //Size size = await DesktopWindow.getWindowSize();
+  //DesktopWindow.setWindowSize(Size(800,600));
+  //DesktopWindow.setFullScreen(true);
+  if (Platform.isWindows) {
+    DesktopWindow.setMaxWindowSize(await DesktopWindow.getWindowSize());
+    DesktopWindow.setMinWindowSize(const Size(400, 800));
+    DesktopWindow.setWindowSize(const Size(400, 800));
+  }
+
+  // Dependence Injection Service Locator
   Inject.initialize();
 
   // Set up the SettingsController, which will glue user settings to multiple
@@ -21,5 +35,26 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+
+// FUTURE
+/*
+  if (kIsWeb) {
+    runApp(AndroidApp(settingsController: settingsController));
+  } else {
+    if (Platform.isAndroid) {
+      runApp(AndroidApp(settingsController: settingsController));
+    } else if (Platform.isIOS) {
+      runApp(AndroidApp(settingsController: settingsController));
+    } else if (Platform.isFuchsia) {
+      runApp(AndroidApp(settingsController: settingsController));
+    } else if (Platform.isLinux) {
+      runApp(AndroidApp(settingsController: settingsController));
+    } else if (Platform.isMacOS) {
+      runApp(AndroidApp(settingsController: settingsController));
+    } else if (Platform.isWindows) {
+      runApp(AndroidApp(settingsController: settingsController));
+    }
+  }
+  */
+  runApp(AndroidApp(settingsController: settingsController));
 }

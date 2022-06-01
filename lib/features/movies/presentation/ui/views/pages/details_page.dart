@@ -1,5 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '/core/utils/api.utils.dart';
 import '/features/movies/domain/entities/movie_details_entity.dart';
@@ -31,14 +32,17 @@ class DetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 32),
             Text(
-              "Synopsis",
+              AppLocalizations.of(context)!.synopsis,
               style: Theme.of(context).textTheme.titleLarge,
             ),
+            const SizedBox(height: 8),
             Text(
               movie.overview,
               style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
+              softWrap: true,
             ),
           ],
         ),

@@ -11,11 +11,11 @@ class MovieController {
     fetch();
   }
 
-  // Para substituir os SetStates e modificar apenas partes da UI.
   ValueNotifier<MovieEntity?> movies = ValueNotifier<MovieEntity?>(null);
-  // Armazena a lista que serão colocada em cache
+  // Cache movies list, used in Search
   MovieEntity? _cachedMovies;
 
+  /// Get the movies list
   fetch() async {
     var result = await _getMoviesUseCase();
 
