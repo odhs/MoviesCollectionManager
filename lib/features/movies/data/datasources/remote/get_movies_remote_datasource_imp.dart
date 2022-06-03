@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
+import '/core/utils/api_utils.dart';
 import '/core/domain/services/http_service.dart';
-import '/core/utils/api.utils.dart';
+import '/features/movies/domain/entities/movie_entity.dart';
 import '/features/movies/data/datasources/get_movies_datasource.dart';
 import '/features/movies/data/dtos/movie_dto.dart';
-import '/features/movies/domain/entities/movie_entity.dart';
 
 class GetMoviesRemoteDatasourceImp implements GetMoviesDataSource {
   
