@@ -14,14 +14,14 @@
   "@ratting": {
     "description": "Details Page Label"
   },
-  "account": "Account",
+  "account": "account",
   "appTitle": "Movies List Manager",
   "collections": "Collections",
   "movies": "Movies",
   "popularity": "Popularity",
   "ratting": "Ratting",
   "numberOfComments": "Number of Comments",
-  "accountType": "Account Type",
+  "accountType": "account Type",
   "synopsis": "Synopsis",
   "username": "Username",
   "email": "Email",

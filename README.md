@@ -22,6 +22,15 @@ User can:
 - [ ] Share **Collections** with friends.
 - [ ] Share a link to a _movie_.
 
+Future:
+
+- [ ] Search a movie on the Internet
+- [ ] Store search in cache
+- [ ] Suggestions with Lasted Search
+- [ ] Export list
+- [ ] Save App data in a cloud of the user
+- [ ] Retrieves App data 
+
 ## App Design
 
 https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node-id=51195%3A4667
@@ -35,42 +44,51 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 	- [ ] Desktop/TV Design
 
 - [x] Architecture (_Clean Arch_)
-- [X] Use Cases
+- [x] Feature, Domain, Data, Use Cases, Core
 
 - [x] Data Sources definition
 - [x] Define model data to match the provided by the API
 - [x] Infrastructure implementation and
 - [ ] Infrastructure Tests
-- [X] Use Cases Implementation
+- [x] Use Cases Implementation
 - [ ] Use Cases Test
 
 - [ ] Refactoring
-	- [X] Dependency Injection (_GetIt_)
-	- [X] Functional Programming for Error Handling (_Dartz_)
+	- [x] Dependency Injection (_GetIt_)
+	- [x] Functional Programming for Error Handling (_Dartz_)
 	- [ ] Class Equality (_Equatable_)
 
 ### Controllers
 
 - [ ] Definition of States
 	- [ ] Implementation of States
-	- [X] Implementation of Controllers
-	- [X] Implementation of Services
+	- [x] Implementation of Controllers
+	- [x] Implementation of Services
 
-- [ ] Persistent local database
+- [ ] Cache in Persistent local database
 
 ### Views
 
 - [ ] Implementation of screens
-	- [x] Screen navigation
-  - [X] Movies Page
-  - [X] Collections Page
-  - [X] Account Page
-	- [ ] Breaking Points Layouts
-	- [ ] Controllers
+  - [ ] Mobile First
+  	- [x] Screen navigation
+    - [x] Movies Page
+    - [x] Collections Page
+    - [x] account Page
+  	- [ ] Controllers
   
-- [X] Implementation of Themes
+- [x] Implementation of Themes
 	
-- [X] Internationalizing Texts
+- [x] Internationalizing Texts
+
+- [ ] Responsive Layout Refactoring
+  - [ ] Mobile Layout
+  - [ ] Tablet Layout
+  - [ ] Desktop Layout
+
+- [ ] Adaptive Layout Refactoring
+  - [ ] Keyboard
+  - [ ] Mouse
 
 ### Tests
 
@@ -97,9 +115,19 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 
 ## Todo Later
 
-- Refactor localization .arb files to a standard.
-- ListTile in movies_page.dart is shrink
+- [ ] Refactor localization .arb files to a standard.
+- [ ] ListTile in movies_page.dart is shrink
 
 ## Known issues 
 
-- 
+- ListTile on MovieScreen is not memory adaptive
+- Button "Try Again" in the no-internet message is not working
+- Button "Filters" in search bar is not working
+
+## Bugs Fix
+
+- [x] No-Internet connection crashs the app when first run
+- [x] No-Internet connection message when first run
+
+
+

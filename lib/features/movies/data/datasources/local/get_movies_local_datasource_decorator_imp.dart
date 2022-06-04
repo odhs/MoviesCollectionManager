@@ -24,18 +24,6 @@ class GetMoviesLocalDataSourceDecoratorImp
         }
         return Left(Exception("Nothing In Cache"));
       },
-      /*
-      (error) async {
-        return _isThereCache().then((value) async {
-          // if there is saved cache return
-          if (value) {
-            return Right(await _getInCache());
-          }
-          // if there is no cache, Exception
-          return Left(Exception("Nothing In Cache"));
-        });
-      },
-      */
       (result) {
         _saveInCache(result);
         return Right(result);

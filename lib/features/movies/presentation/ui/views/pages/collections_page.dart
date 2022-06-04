@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'settings_view.dart';
-import '/features/movies/presentation/ui/widgets/float_appbar.dart';
+import '/features/movies/presentation/ui/components/float_appbar.dart';
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({Key? key}) : super(key: key);

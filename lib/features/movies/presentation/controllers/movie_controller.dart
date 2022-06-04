@@ -21,7 +21,10 @@ class MovieController {
 
     try {
       result.fold(
-        (error) => throw Exception(error),
+        (error) {
+          // API fails and cache is empty
+          throw Exception(error);
+        },
         (success) => movies.value = success,
       );
     } catch (e) {

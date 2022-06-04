@@ -29,13 +29,26 @@ class _MoviesPageState extends State<MoviesPage> {
     _fethMovies();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   // TODO FUTURE: Create a state to represent WITHOUT A INTERNET CONNECTION on bloc provider
-  _fethMovies() async {
-    if (!await _controller.fetch()) {
-      setState(() {
+  void _fethMovies() async {
+    // TODO dispose state needs to stop the call
+    var e = await _controller.fetch();
+
+    // If the page was changed to another, return to avoid SetState() error
+    if (!mounted) return;
+
+    setState(() {
+      if (e) {
+        _fetchError = false;
+      } else {
         _fetchError = true;
-      });
-    }
+      }
+    });
   }
 
 // TODO mudar variáveis para settings view e incluir no services e no controller
@@ -190,17 +203,23 @@ class _MoviesPageState extends State<MoviesPage> {
             padding: const EdgeInsets.all(16.0),
             child: ButtonBar(
               children: [
-                OutlinedButton(
-                  child: const Text(
-                    'Try Again',
-                  ),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    // Foreground color
+                    onPrimary:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
+                    // Background color
+                    primary: Theme.of(context).colorScheme.secondaryContainer,
+                  ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
                   onPressed: () {
                     setState(() {
                       _fetchError = false;
-                      // TODO bug fix: Try again is not working when Internet is re-established 
+                      // TODO bug fix: Try again is not working when Internet is re-established
                       _fethMovies();
                     });
                   },
+                  label: const Text('Try Again'),
+                  icon: const Icon(Icons.replay),
                 ),
               ],
             ),
