@@ -121,7 +121,6 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 ## Known issues 
 
 - ListTile on MovieScreen is not memory adaptive
-- Button "Try Again" in the no-internet message is not working
 - Button "Filters" in search bar is not working
 
 ## Bugs Fix
