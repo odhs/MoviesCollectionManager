@@ -36,7 +36,6 @@ class _MoviesPageState extends State<MoviesPage> {
 
   // TODO FUTURE: Create a state to represent WITHOUT A INTERNET CONNECTION on bloc provider
   void _fethMovies() async {
-    // TODO dispose state needs to stop the call
     var e = await _controller.fetch();
 
     // If the page was changed to another, return to avoid SetState() error
@@ -72,13 +71,12 @@ class _MoviesPageState extends State<MoviesPage> {
   }
 
   /// Persistent Search Floating App Bar
-  // TODO mover para componentes
+  // TODO move to components
   Widget _sliverAppBarFloatPersistentSearch() {
     return SliverAppBar(
       leading: Container(),
       scrolledUnderElevation: 0.0,
       backgroundColor: Colors.transparent,
-      //backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       pinned: _pinned,
       snap: _floating,
       floating: _floating,
@@ -203,6 +201,7 @@ class _MoviesPageState extends State<MoviesPage> {
             padding: const EdgeInsets.all(16.0),
             child: ButtonBar(
               children: [
+                // TODO move to components (Material Design 3 style)
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     // Foreground color
@@ -214,7 +213,6 @@ class _MoviesPageState extends State<MoviesPage> {
                   onPressed: () {
                     setState(() {
                       _fetchError = false;
-                      // TODO bug fix: Try again is not working when Internet is re-established
                       _fethMovies();
                     });
                   },

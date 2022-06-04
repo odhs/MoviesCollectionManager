@@ -11,7 +11,6 @@ import '/features/movies/presentation/controllers/settings_controller.dart';
 import 'core/themes/dark_theme.dart';
 import 'core/themes/light_theme.dart';
 
-
 class AndroidApp extends StatelessWidget {
   const AndroidApp({
     Key? key,
@@ -57,7 +56,7 @@ class AndroidApp extends StatelessWidget {
           // The appTitle is defined in .arb files found in the localization
           // directory.
           onGenerateTitle: (BuildContext context) =>
-              AppLocalizations.of(context)!. appTitle,
+              AppLocalizations.of(context)!.appTitle,
 
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
