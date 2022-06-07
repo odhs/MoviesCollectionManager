@@ -1,9 +1,12 @@
 import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 enum ScreenType { handset, tablet, desktop, watch }
 
 enum ScreenSize { small, normal, large, extraLarge }
+
+enum Os { ios, android, windows, macos, linux, fuchsia, web }
 
 /// Device Screen Info
 ///
@@ -20,13 +23,37 @@ class DeviceScreenInfoUtils {
   static final bool isMacOS = Platform.isMacOS;
   static final bool isLinux = Platform.isLinux;
   static final bool isWindows = Platform.isWindows;
+  static final bool isFuchsia = Platform.isFuchsia;
+  //static const bool isWebview = kIsWeb;
 
   // Higher level device class abstractions (more syntax sugar for the views)
-  static final bool isWeb = !(isWindows || isMacOS || isLinux || isAndroid || isIOS);
+  static bool get isWeb => kIsWeb;
   static bool get isDesktop => isWindows || isMacOS || isLinux;
-  static bool get isMobile => isAndroid || isIOS;
+  static bool get isMobile => isAndroid || isIOS || isFuchsia;
   static bool get isDesktopOrWeb => isDesktop || isWeb;
   static bool get isMobileOrWeb => isMobile || isWeb;
+
+  static Os getOs() {
+    if (isAndroid) {
+      return Os.android;
+    }
+    if (isLinux) {
+      return Os.linux;
+    }
+    if (isIOS) {
+      return Os.ios;
+    }
+    if (isMacOS) {
+      return Os.macos;
+    }
+    if (isWindows) {
+      return Os.windows;
+    }
+    if(isFuchsia){
+      return Os.fuchsia;
+    }
+    return Os.web;
+  }
 
   /// Get the type based on context
   ScreenType getFormFactor(BuildContext context) {
