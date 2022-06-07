@@ -1,6 +1,6 @@
-import 'dart:io' show Platform;
-import 'package:desktop_window/desktop_window.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:movieapp/core/utils/device_screen_info_utils.dart';
 
 import 'app.dart';
 import 'core/inject/inject.dart';
@@ -44,6 +44,8 @@ void main() async {
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
 
+//var os = getOs();
+
 // FUTURE
 /*
   if (kIsWeb) {
@@ -64,5 +66,16 @@ void main() async {
     }
   }
   */
+
   runApp(AndroidApp(settingsController: settingsController));
+
+  if (DeviceScreenInfoUtils.isWindows) {
+    doWhenWindowReady(() {
+      const initialSize = Size(400, 800);
+      appWindow.minSize = initialSize;
+      appWindow.size = initialSize;
+      appWindow.alignment = Alignment.center;
+      appWindow.show();
+    });
+  }
 }

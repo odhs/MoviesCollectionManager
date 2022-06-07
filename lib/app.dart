@@ -1,3 +1,4 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -71,6 +72,7 @@ class AndroidApp extends StatelessWidget {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
+                appWindow.title = AppLocalizations.of(context)!.appTitle;
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return applyTheme(
