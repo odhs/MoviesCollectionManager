@@ -20,7 +20,7 @@ class GetMoviesLocalDataSourceDecoratorImp
     return (await super()).fold(
       (error) async {
         if (await _isThereCache()) {
-          return Right(await _getInCache());
+          return Right(await _getFromCache());
         }
         return Left(Exception("Nothing In Cache"));
       },
@@ -48,13 +48,13 @@ class GetMoviesLocalDataSourceDecoratorImp
     return false;
   }
 
-  Future<MovieEntity> _getInCache() async {
+  Future<MovieEntity> _getFromCache() async {
     var prefs = await SharedPreferences.getInstance();
     var moviesJsonString = prefs.getString('movies_cache')!;
     var json = jsonDecode(moviesJsonString);
     var movies = MovieDto.fromJson(json);
     if (kDebugMode) {
-      print('recuperou do cache os filmes ' + movies.toString());
+      print('Get from cache the movies ' + movies.toString());
     }
     return movies;
   }
