@@ -11,17 +11,6 @@ void main() async {
   // ensure that the application already loaded the widgets
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Windows OS minimal size
-  //Size size = await DesktopWindow.getWindowSize();
-  //DesktopWindow.setWindowSize(Size(800,600));
-  //DesktopWindow.setFullScreen(true);
-  /* TODO mudar para o pacote bitsdojo_window
-  if (Platform.isWindows) {
-    DesktopWindow.setWindowSize(const Size(400, 800));
-    DesktopWindow.setMinWindowSize(const Size(400, 800)); 
-  }
-  */
-
   // Dependence Injection Service Locator
   Inject.initialize();
 

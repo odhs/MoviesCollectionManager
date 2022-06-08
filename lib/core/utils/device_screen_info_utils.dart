@@ -12,9 +12,12 @@ enum Os { ios, android, windows, macos, linux, fuchsia, web }
 ///
 /// Contains information about the device screen
 class DeviceScreenInfoUtils {
-  // device breakpointss
+
+  /// Device Breakpoint DESKTOP
   static const double desktop = 900;
+  /// Device Breakpoint TABLET
   static const double tablet = 600;
+  /// Device Breakpoint HANDSET
   static const double handset = 300;
 
   // Syntax sugar, proxy the Platform methods so our views can reference a single class

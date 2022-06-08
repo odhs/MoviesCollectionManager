@@ -23,7 +23,6 @@ dependencies:
   dartz:
   # Dependence Injection Service Locator
   get_it:
-  desktop_window: ^0.4.0
   # https://pub.dev/packages/bitsdojo_window/
   bitsdojo_window: ^0.1.2
   # Future Dependences:

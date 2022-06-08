@@ -9,8 +9,9 @@ import '/features/movies/presentation/ui/views/navigation_page.dart';
 import '/features/movies/presentation/ui/views/pages/account_page.dart';
 import '/features/movies/presentation/ui/views/pages/settings_view.dart';
 import '/features/movies/presentation/controllers/settings_controller.dart';
-import 'core/themes/dark_theme.dart';
-import 'core/themes/light_theme.dart';
+import '/core/utils/device_screen_info_utils.dart';
+import '/core/themes/dark_theme.dart';
+import '/core/themes/light_theme.dart';
 
 class AndroidApp extends StatelessWidget {
   const AndroidApp({
@@ -72,16 +73,29 @@ class AndroidApp extends StatelessWidget {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
-                appWindow.title = AppLocalizations.of(context)!.appTitle;
+                // If the Title-Bar is supported define the name
+                if (DeviceScreenInfoUtils.isDesktop) {
+                  appWindow.title = AppLocalizations.of(context)!.appTitle;
+                }
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return applyTheme(
-                        context, SettingsView(controller: settingsController));
+                      context,
+                      SettingsView(
+                        controller: settingsController,
+                      ),
+                    );
                   case AccountPage.routeName:
-                    return applyTheme(context, const AccountPage());
+                    return applyTheme(
+                      context,
+                      const AccountPage(),
+                    );
                   case NavigationPage.routeName:
                   default:
-                    return applyTheme(context, const NavigationPage());
+                    return applyTheme(
+                      context,
+                      const NavigationPage(),
+                    );
                 }
               },
             );
@@ -91,10 +105,12 @@ class AndroidApp extends StatelessWidget {
     );
   }
 
+  /// Apply the theme overlay support in a scaffold widget
   applyTheme(BuildContext context, Widget widget) {
     return AnnotatedRegion(value: barTheme(context), child: widget);
   }
 
+  /// Theme overlay to colors of the StatusBar and NavigationBar
   SystemUiOverlayStyle barTheme(BuildContext context) {
     return SystemUiOverlayStyle(
       // TOP: STATUS BAR
