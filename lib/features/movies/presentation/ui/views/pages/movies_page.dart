@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:get_it/get_it.dart';
@@ -22,16 +23,22 @@ class _MoviesPageState extends State<MoviesPage> {
   late final MovieController _controller;
   bool _fetchError = false;
 
+  late ScrollController _hideButtonController;
+
+  // TODO mudar variáveis para settings view e incluir no services e no controller
+  final bool _pinned = false;
+  final bool _floating = true;
+
+// FAB Animation
+  final duration = const Duration(milliseconds: 300);
+  var _showFab = true;
+
   @override
   void initState() {
     super.initState();
     _controller = GetIt.I.get<MovieController>();
+    _settingScrollBar();
     _fethMovies();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   // TODO FUTURE: Create a state to represent WITHOUT A INTERNET CONNECTION on bloc provider
@@ -50,9 +57,39 @@ class _MoviesPageState extends State<MoviesPage> {
     });
   }
 
-// TODO mudar variáveis para settings view e incluir no services e no controller
-  final bool _pinned = false;
-  final bool _floating = true;
+  /// TODO MOVE TO CONTROLLER
+  void _settingScrollBar() {
+    _hideButtonController = ScrollController();
+    _hideButtonController.addListener(() {
+      if (_hideButtonController.position.atEdge) {
+        
+        if (_showFab == false) {
+          setState(() {
+            _showFab = true;
+          });
+          return;
+        }
+      }
+
+      if (_hideButtonController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (_showFab == true) {
+          setState(() {
+            _showFab = false;
+          });
+        }
+      } else {
+        if (_hideButtonController.position.userScrollDirection ==
+            ScrollDirection.forward) {
+          if (_showFab == false) {
+            setState(() {
+              _showFab = true;
+            });
+          }
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +98,40 @@ class _MoviesPageState extends State<MoviesPage> {
       drawer: Container(),
       body: SafeArea(
         child: CustomScrollView(
+          controller: _hideButtonController,
           slivers: [
             _sliverAppBarFloatPersistentSearch(),
             _moviesSliverList(),
+            const SliverToBoxAdapter(
+              // Space to a FAB button as the height of AppBar
+              child: SizedBox(height: kToolbarHeight + 8.0),
+            )
           ],
+        ),
+      ),
+      floatingActionButton: _floatingActionButton(),
+    );
+  }
+
+  /// Scroll Up Floating Action Buttons
+  Widget _floatingActionButton() {
+    return AnimatedSlide(
+      duration: duration,
+      offset: _showFab ? Offset.zero : const Offset(0, 2),
+      child: AnimatedOpacity(
+        duration: duration,
+        opacity: _showFab ? 1 : 0,
+        child: FloatingActionButton(
+          child: const Icon(
+            Icons.arrow_upward_rounded,
+          ),
+          onPressed: () {
+            _hideButtonController.animateTo(
+              0.0,
+              duration: duration * 2,
+              curve: Curves.linear,
+            );
+          },
         ),
       ),
     );
@@ -86,35 +153,29 @@ class _MoviesPageState extends State<MoviesPage> {
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         child: AppBar(
           titleSpacing: 0.0,
-          // TODO verificar se pode retirar o GestureDetector
-          title: GestureDetector(
-            onTap: () {},
-            // Glue the MovieController to the text field.
-            child: ValueListenableBuilder<MovieEntity?>(
-              valueListenable: _controller.movies,
-              builder: (__, movies, _) {
-                return Visibility(
-                  visible: movies != null,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                          onChanged: _controller.onChanged,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText:
-                                AppLocalizations.of(context)!.searchAMovie,
-                          ),
+          title: ValueListenableBuilder<MovieEntity?>(
+            valueListenable: _controller.movies,
+            builder: (__, movies, _) {
+              return Visibility(
+                visible: movies != null,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                        onChanged: _controller.onChanged,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: AppLocalizations.of(context)!.searchAMovie,
                         ),
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           centerTitle: false,
           elevation: 0.0,
