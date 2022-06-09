@@ -27,7 +27,7 @@ User can:
 - [ ] Share **Collections** with friends.
 - [ ] Share a link to a _movie_.
 
-Future:
+### Future User Cases
 
 - [ ] Search a movie on the Internet
 - [ ] Store search in cache
@@ -109,19 +109,6 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 - [ ] Prepare _Google Play_ Art
 - [ ] _Google Play_ Profile
 
-## Future
-
-- [ ] Prepare Code for other platforms
-  - [ ] Code for iOS
-  - [ ] Code for Windows
-  - [ ] Code for Linux
-
-- [ ] All the other things no planned yet
-
-## Todo Later
-
-- [ ] Refactor localization .arb files to a standard.
-
 ## Known issues 
 
 - ListTile on MovieScreen is not memory adaptive
@@ -133,8 +120,14 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 - [x] No-Internet connection message when first run
 - [x] Scroll Up/Down FAB not working on the end of the scroll
 
-# FUTURE
+# Future
 
-To work in teams the project it will be divided as in the following image. To create a Multi-Repo in the future if necessary.
+- [ ] Refactor localization .arb files to a standard.
+- [ ] Prepare Code for other platforms
+  - [ ] Code for iOS
+  - [ ] Code for Windows
+  - [ ] Code for Linux
+
+- [ ] To work in teams the project it will be divided as in the following image. To create a Multi-Repo in the future if necessary.
 
 ![micro_app_arch](https://user-images.githubusercontent.com/6653128/172748425-df751958-3b08-486e-b45b-b0e5012dd420.png)
