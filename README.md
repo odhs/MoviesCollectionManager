@@ -5,6 +5,8 @@ Movie Collection Manager allows you to choose your movies and put them in collec
 The Project is collecting data of the API _The Movie Database_.
 [The Movie Database](https://www.themoviedb.org/), better known by the acronym TMDb, is a free and open source database about movies and series.
 
+![screenshot_home](https://user-images.githubusercontent.com/6653128/172750291-c38d5ef2-3fae-41c5-9c70-ca848cbe43f9.png)
+
 ## Use Cases 
 
 User can:
