@@ -5,9 +5,9 @@ import '../../domain/usecases/get_movies_usecase.dart';
 
 import '../dtos/movie_dto.dart';
 
-class MovieController {
+class MoviesController {
   final GetMoviesUseCase _getMoviesUseCase;
-  MovieController(this._getMoviesUseCase) {
+  MoviesController(this._getMoviesUseCase) {
     //fetch();
   }
 

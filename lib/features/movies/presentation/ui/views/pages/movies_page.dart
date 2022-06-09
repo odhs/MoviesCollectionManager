@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
 
 import '/features/movies/domain/entities/movie_entity.dart';
-import '/features/movies/presentation/controllers/movie_controller.dart';
+import '/features/movies/presentation/controllers/movies_controller.dart';
 import '/features/movies/presentation/ui/views/pages/settings_view.dart';
 import '/features/movies/presentation/ui/components/custom_list_card_widget.dart';
 
@@ -20,10 +21,10 @@ class MoviesPage extends StatefulWidget {
 }
 
 class _MoviesPageState extends State<MoviesPage> {
-  late final MovieController _controller;
+  late final MoviesController _controller;
   bool _fetchError = false;
 
-  late ScrollController _hideButtonController;
+  late ScrollController _scrollControler;
 
   // TODO mudar variáveis para settings view e incluir no services e no controller
   final bool _pinned = false;
@@ -31,13 +32,14 @@ class _MoviesPageState extends State<MoviesPage> {
 
 // FAB Animation
   final duration = const Duration(milliseconds: 300);
-  var _showFab = true;
+  var _showScrollFAB = false;
+  var _isScrollToTopEnabled = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = GetIt.I.get<MovieController>();
-    _settingScrollBar();
+    _controller = GetIt.I.get<MoviesController>();
+    _initScrollController();
     _fethMovies();
   }
 
@@ -58,37 +60,70 @@ class _MoviesPageState extends State<MoviesPage> {
   }
 
   /// TODO MOVE TO CONTROLLER
-  void _settingScrollBar() {
-    _hideButtonController = ScrollController();
-    _hideButtonController.addListener(() {
-      if (_hideButtonController.position.atEdge) {
-        
-        if (_showFab == false) {
-          setState(() {
-            _showFab = true;
-          });
-          return;
-        }
+  void _initScrollController() {
+    _scrollControler = ScrollController();
+
+    _scrollControler.addListener(() {
+      if (!mounted) return;
+
+      /// Hide FAB arrow when the list is on the top
+      if (_scrollControler.position.pixels < 1) {
+        setState(
+          () {
+            _showScrollFAB = false;
+            _isScrollToTopEnabled = false;
+          },
+        );
+      } else {
+        setState(
+          () {
+            _showScrollFAB = true;
+          },
+        );
       }
 
-      if (_hideButtonController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        if (_showFab == true) {
-          setState(() {
-            _showFab = false;
-          });
-        }
+      if (_scrollControler.position.pixels >=
+          _scrollControler.position.maxScrollExtent) {
+        /// Arrow UP
+        _isScrollToTopEnabled = true;
       } else {
-        if (_hideButtonController.position.userScrollDirection ==
-            ScrollDirection.forward) {
-          if (_showFab == false) {
-            setState(() {
-              _showFab = true;
-            });
-          }
+        /// Reverse == scroll bar to Bottom
+        if (_scrollControler.position.userScrollDirection ==
+            ScrollDirection.reverse) {
+          /// Scrolling to Bottom
+          /// Content up
+          /// Shows FAB Arrow UP
+          _isScrollToTopEnabled = false;
+        } else {
+          /// Scrolling to Top
+          /// Content down
+          /// Shows FAB Arrow DOWN
+          _isScrollToTopEnabled = true;
         }
       }
     });
+  }
+
+  void _scrollToTop() {
+    _scrollControler.animateTo(
+      0.0,
+      duration: duration * 2,
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  void _scrollToBottom() {
+    _scrollControler.animateTo(
+      _scrollControler.position.maxScrollExtent,
+      duration: duration * 2,
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollControler.dispose(); // dispose the controller
+    super.dispose();
   }
 
   @override
@@ -98,40 +133,65 @@ class _MoviesPageState extends State<MoviesPage> {
       drawer: Container(),
       body: SafeArea(
         child: CustomScrollView(
-          controller: _hideButtonController,
+          controller: _scrollControler,
           slivers: [
-            _sliverAppBarFloatPersistentSearch(),
-            _moviesSliverList(),
+            _sliverLogoTMDB(),
+            _sliverAppBarFloatingPersistentSearch(),
+            _sliverMoviesList(),
             const SliverToBoxAdapter(
-              // Space to a FAB button as the height of AppBar
+              // Space to a FAB button as the height of AppBar + 8.0
               child: SizedBox(height: kToolbarHeight + 8.0),
             )
           ],
         ),
       ),
-      floatingActionButton: _floatingActionButton(),
+      floatingActionButton: _floatingActionButtonScrollUp(),
     );
   }
 
   /// Scroll Up Floating Action Buttons
-  Widget _floatingActionButton() {
+  Widget _floatingActionButtonScrollUp() {
     return AnimatedSlide(
       duration: duration,
-      offset: _showFab ? Offset.zero : const Offset(0, 2),
+      offset: _showScrollFAB ? Offset.zero : const Offset(0, 2),
       child: AnimatedOpacity(
         duration: duration,
-        opacity: _showFab ? 1 : 0,
+        opacity: _showScrollFAB ? 1 : 0,
         child: FloatingActionButton(
-          child: const Icon(
-            Icons.arrow_upward_rounded,
+          elevation: 3.0,
+          child: AnimatedRotation(
+            turns: _isScrollToTopEnabled ? 0 : .5,
+            duration: duration,
+            child: const Icon(
+              Icons.arrow_upward_rounded,
+            ),
           ),
           onPressed: () {
-            _hideButtonController.animateTo(
-              0.0,
-              duration: duration * 2,
-              curve: Curves.linear,
-            );
+            if (_isScrollToTopEnabled) {
+              // Arrow to UP
+              _scrollToTop();
+            } else {
+              // Arrow to DOWN
+              _scrollToBottom();
+            }
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _sliverLogoTMDB() {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: 56,
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+          child: SvgPicture.asset(
+            color: Theme.of(context).colorScheme.inverseSurface,
+            'assets/tmdb-logo.svg',
+            semanticsLabel: 'TMDB logo',
+          ),
         ),
       ),
     );
@@ -139,7 +199,7 @@ class _MoviesPageState extends State<MoviesPage> {
 
   /// Persistent Search Floating App Bar
   // TODO move to components
-  Widget _sliverAppBarFloatPersistentSearch() {
+  Widget _sliverAppBarFloatingPersistentSearch() {
     return SliverAppBar(
       leading: Container(),
       scrolledUnderElevation: 0.0,
@@ -201,7 +261,35 @@ class _MoviesPageState extends State<MoviesPage> {
   }
 
 // Mover para componentes
-  Widget _moviesSliverList() {
+  /// Layout to Handset
+  Widget _sliverMoviesListHandSet() {
+    return SliverToBoxAdapter(
+      // Glue the MoviesController in the ListView
+      child: ValueListenableBuilder<MovieEntity?>(
+        valueListenable: _controller.movies,
+        builder: (_, movies, __) {
+          return movies != null
+              // TODO arranjar outra solução para ListView ter performance na memória
+              ? ListView.builder(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: movies.listMovies.length,
+                  itemBuilder: (_, idx) => CustomListCardWidget(
+                    movie: movies.listMovies[idx],
+                  ),
+                )
+              // Shows a loader
+              : _fetchError
+                  ? _noInternetConnectionMessage()
+                  : Lottie.asset('assets/lottie.json', repeat: true);
+        },
+      ),
+    );
+  }
+
+  /// Layout to Tablet
+  Widget _sliverMoviesList() {
     return SliverToBoxAdapter(
       // Glue the MoviesController in the ListView
       child: ValueListenableBuilder<MovieEntity?>(
@@ -242,18 +330,18 @@ class _MoviesPageState extends State<MoviesPage> {
               children: [
                 const Icon(Icons.info_outline_rounded, color: Colors.amber),
                 const SizedBox(width: 16),
-                // TODO translate
                 Text(
+                  // TODO translate
                   "There was a problem!",
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ],
             ),
           ),
-          // TODO translate
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
+              // TODO translate
               "Unable to establish an Internet connection. Please verify your Data or Wifi connection.",
               style: Theme.of(context).textTheme.bodyText2,
             ),

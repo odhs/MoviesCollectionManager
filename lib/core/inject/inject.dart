@@ -10,7 +10,7 @@ import '/features/movies/data/repositories/get_movies_repository_imp.dart';
 import '/features/movies/domain/repositories/get_movies_repository.dart';
 import '/features/movies/domain/usecases/get_movies_usecase.dart';
 import '/features/movies/domain/usecases/get_movies_usecase_imp.dart';
-import '/features/movies/presentation/controllers/movie_controller.dart';
+import '/features/movies/presentation/controllers/movies_controller.dart';
 
 class Inject {
   static initialize() {
@@ -33,8 +33,8 @@ class Inject {
       () => GetMoviesUseCaseImp(getIt()),
     );
     // controllers
-    getIt.registerLazySingleton<MovieController>(
-      () => MovieController(getIt()),
+    getIt.registerLazySingleton<MoviesController>(
+      () => MoviesController(getIt()),
     );
   }
 }

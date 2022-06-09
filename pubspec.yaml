@@ -13,18 +13,27 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0 
   dio:
+
   # Animation of a lottie file: https://lottiefiles.com/ 
   lottie:
+
   # Cache for the images
   cached_network_image:
+
   # Store the preferences and for while de API response
   shared_preferences:
+
   # Facilitates the try/catch 
   dartz:
+
   # Dependence Injection Service Locator
   get_it:
+
   # https://pub.dev/packages/bitsdojo_window/
   bitsdojo_window: ^0.1.2
+
+  # loads the SVG in ~1.1ms
+  flutter_svg: ^1.1.0
   # Future Dependences:
   # tmdb_api: ^2.1.2
   # flutter_bloc: ^8.0.1
@@ -32,7 +41,6 @@ dependencies:
   # flutter_modular: ^5.0.2
   # Organize translations, package from dart https://pub.dev/packages/intl_translation
   # flutter pub add intl_translation
-  # To control min and max sizes in screen
 
 
 dev_dependencies:

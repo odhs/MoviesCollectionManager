@@ -116,17 +116,21 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 ## Todo Later
 
 - [ ] Refactor localization .arb files to a standard.
-- [ ] ListTile in movies_page.dart is shrink
 
 ## Known issues 
 
 - ListTile on MovieScreen is not memory adaptive
 - Button "Filters" in search bar is not working
 
-## Bugs Fix
+## Bug Fix
 
-- [x] No-Internet connection crashs the app when first run
+- [x] No-Internet connection crashes the app when first run
 - [x] No-Internet connection message when first run
+- [x] Scroll Up/Down FAB not working on the end of the scroll
 
+# FUTURE
 
+To work in teams the project it will be divided in Micro Apps using the package mode of the Flutter, 
+to create a Multi-Repo if necessary. Then the App will be divided as in the following image:
 
+![micro_app_arch](https://user-images.githubusercontent.com/6653128/172748425-df751958-3b08-486e-b45b-b0e5012dd420.png)

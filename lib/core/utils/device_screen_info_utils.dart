@@ -12,11 +12,12 @@ enum Os { ios, android, windows, macos, linux, fuchsia, web }
 ///
 /// Contains information about the device screen
 class DeviceScreenInfoUtils {
-
   /// Device Breakpoint DESKTOP
   static const double desktop = 900;
+
   /// Device Breakpoint TABLET
   static const double tablet = 600;
+
   /// Device Breakpoint HANDSET
   static const double handset = 300;
 
@@ -52,10 +53,30 @@ class DeviceScreenInfoUtils {
     if (isWindows) {
       return Os.windows;
     }
-    if(isFuchsia){
+    if (isFuchsia) {
       return Os.fuchsia;
     }
     return Os.web;
+  }
+
+  String platformDescription() {
+    if (kIsWeb) {
+      return 'Web';
+    } else if (Platform.isAndroid) {
+      return 'Android';
+    } else if (Platform.isIOS) {
+      return 'iOS';
+    } else if (Platform.isWindows) {
+      return 'Windows';
+    } else if (Platform.isMacOS) {
+      return 'macOS';
+    } else if (Platform.isLinux) {
+      return 'Linux';
+    } else if (Platform.isFuchsia) {
+      return 'Fuchsia';
+    } else {
+      return 'Unknown';
+    }
   }
 
   /// Get the type based on context
