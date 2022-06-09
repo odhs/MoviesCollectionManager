@@ -1,6 +1,6 @@
-# Movie Collection Manager
+# Movies Collection Manager
 
-Movie Collection Manager allows you to choose your movies and put them in collections, share with friends and see which streaming services contain the movies.
+Movies Collection Manager allows you to choose your movies and put them in collections, share with friends and see which streaming services contain the movies.
 
 The Project is collecting data of the API _The Movie Database_.
 [The Movie Database](https://www.themoviedb.org/), better known by the acronym TMDb, is a free and open source database about movies and series.
