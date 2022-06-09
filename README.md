@@ -2,6 +2,9 @@
 
 Movie Collection Manager allows you to choose your movies and put them in collections, share with friends and see which streaming services contain the movies.
 
+The Project is collecting data of the API _The Movie Database_.
+[The Movie Database](https://www.themoviedb.org/), better known by the acronym TMDb, is a free and open source database about movies and series.
+
 ## Use Cases 
 
 User can:
@@ -130,7 +133,6 @@ https://www.figma.com/file/p7dCXduT1B2EyMsqnPqnAX/Movies-Collection-Manager?node
 
 # FUTURE
 
-To work in teams the project it will be divided in Micro Apps using the package mode of the Flutter, 
-to create a Multi-Repo if necessary. Then the App will be divided as in the following image:
+To work in teams the project it will be divided as in the following image. To create a Multi-Repo in the future if necessary.
 
 ![micro_app_arch](https://user-images.githubusercontent.com/6653128/172748425-df751958-3b08-486e-b45b-b0e5012dd420.png)
