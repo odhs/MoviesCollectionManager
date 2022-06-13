@@ -22,7 +22,8 @@ void main() async {
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();
 
-  // Visual Density to provide touch or click depends on device
+  /// Visual Density to provide touch or click depends on device
+/// TODO implement density support
 /*
   double densityAmt = touchMode ? 0.0 : -1.0;
   VisualDensity density =
@@ -33,32 +34,33 @@ void main() async {
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
 
-//var os = getOs();
-
-// FUTURE
-/*
-  if (kIsWeb) {
-    runApp(AndroidApp(settingsController: settingsController));
-  } else {
-    if (Platform.isAndroid) {
+  /// Switch between the platforms
+  switch (DeviceScreenInfoUtils.getOs()) {
+    case Os.android:
       runApp(AndroidApp(settingsController: settingsController));
-    } else if (Platform.isIOS) {
+      break;
+    case Os.ios:
       runApp(AndroidApp(settingsController: settingsController));
-    } else if (Platform.isFuchsia) {
+      break;
+    case Os.windows:
       runApp(AndroidApp(settingsController: settingsController));
-    } else if (Platform.isLinux) {
+      break;
+    case Os.linux:
       runApp(AndroidApp(settingsController: settingsController));
-    } else if (Platform.isMacOS) {
+      break;
+    case Os.macos:
       runApp(AndroidApp(settingsController: settingsController));
-    } else if (Platform.isWindows) {
+      break;
+    case Os.fuchsia:
       runApp(AndroidApp(settingsController: settingsController));
-    }
+      break;
+    default:
+      runApp(AndroidApp(settingsController: settingsController));
   }
-  */
 
-  runApp(AndroidApp(settingsController: settingsController));
-
-  if (DeviceScreenInfoUtils.isWindows) {
+  /// If device is a Desktop set window propierties, less title.
+  /// The window title is inside the AndroidApp, because it needs context.
+  if (DeviceScreenInfoUtils.isDesktop) {
     doWhenWindowReady(() {
       const initialSize = Size(400, 800);
       appWindow.minSize = initialSize;
