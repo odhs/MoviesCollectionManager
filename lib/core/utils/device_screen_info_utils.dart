@@ -11,6 +11,7 @@ enum Os { ios, android, windows, macos, linux, fuchsia, web }
 /// Device Screen Info
 ///
 /// Contains information about the device screen
+/// Flutter uses the dimension of handset of 360x800
 class DeviceScreenInfoUtils {
   /// Device Breakpoint DESKTOP
   static const double desktop = 900;

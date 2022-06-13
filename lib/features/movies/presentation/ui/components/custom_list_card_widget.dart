@@ -33,7 +33,7 @@ class CustomListCardWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _movieCoverFragmentLeft(),
+                _movieCoverFragmentLeft(context),
                 _dataColumnFragmentRight(context),
               ],
             ),
@@ -43,7 +43,7 @@ class CustomListCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _movieCoverFragmentLeft() {
+  Widget _movieCoverFragmentLeft(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         boxShadow: [
@@ -61,12 +61,30 @@ class CustomListCardWidget extends StatelessWidget {
           topLeft: Radius.circular(12),
           bottomLeft: Radius.circular(12),
         ),
-        child: Hero(
-          tag: movie.id,
-          child: CachedNetworkImage(
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-            placeholder: (context, url) => const CircularProgressIndicator(),
-            imageUrl: API.requestImg(movie.posterPath),
+        child: Container(
+          color: Theme.of(context).cardTheme.color,
+          child: Hero(
+            tag: movie.id,
+            child: CachedNetworkImage(
+              errorWidget: (context, url, error) {
+                // TODO criar a relação de Aspect Ratio para a imagem aumentar junto com o Card
+                return const SizedBox(
+                  height: 400,
+                  width: 103,
+                  child: Icon(Icons.error),
+                );
+              },
+              placeholder: (context, url) => const Center(
+                // TODO criar a relação de Aspect Ratio para a imagem aumentar junto com o Card
+                child: SizedBox(
+                  height: 400,
+                  width: 120,
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              imageUrl: API.requestImg(movie.posterPath),
+              //imageUrl: "http://google213.com.br/",
+            ),
           ),
         ),
       ),
