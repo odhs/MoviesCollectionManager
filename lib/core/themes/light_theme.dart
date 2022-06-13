@@ -7,7 +7,7 @@ class LightTheme extends CoreTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorSchemeSeed: Colors.lightBlue[900],
+      colorSchemeSeed: CoreTheme.primary,
       fontFamily: CoreTheme.fontFamily,
     );
   }

@@ -7,7 +7,7 @@ class DarkTheme extends CoreTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorSchemeSeed: Colors.lightBlue[900],
+      colorSchemeSeed: CoreTheme.primary,
       fontFamily: CoreTheme.fontFamily,
     );
   }
