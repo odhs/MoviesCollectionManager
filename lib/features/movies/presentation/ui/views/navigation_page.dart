@@ -39,7 +39,6 @@ class _NavigationPageState extends State<NavigationPage> {
             backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
           ),
           child: NavigationBar(
-            height: 65,
             selectedIndex: _tabselected,
             labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
             animationDuration: const Duration(seconds: 2),

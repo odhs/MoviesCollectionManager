@@ -81,16 +81,16 @@ class DeviceScreenInfoUtils {
   }
 
   /// Get the type based on context
-  ScreenType getFormFactor(BuildContext context) {
+  static ScreenType getFormFactor(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.shortestSide;
-    if (deviceWidth > DeviceScreenInfoUtils.desktop) return ScreenType.desktop;
-    if (deviceWidth > DeviceScreenInfoUtils.tablet) return ScreenType.tablet;
-    if (deviceWidth > DeviceScreenInfoUtils.handset) return ScreenType.handset;
+    if (deviceWidth >= DeviceScreenInfoUtils.desktop) return ScreenType.desktop;
+    if (deviceWidth >= DeviceScreenInfoUtils.tablet) return ScreenType.tablet;
+    if (deviceWidth >= DeviceScreenInfoUtils.handset) return ScreenType.handset;
     return ScreenType.watch;
   }
 
   /// Get the size based on context
-  ScreenSize getSize(BuildContext context) {
+  static ScreenSize getSize(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.shortestSide;
     if (deviceWidth > 900) return ScreenSize.extraLarge;
     if (deviceWidth > 600) return ScreenSize.large;

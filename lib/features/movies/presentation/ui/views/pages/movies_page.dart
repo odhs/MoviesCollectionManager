@@ -9,7 +9,7 @@ import 'package:lottie/lottie.dart';
 import '/features/movies/domain/entities/movie_entity.dart';
 import '/features/movies/presentation/controllers/movies_controller.dart';
 import '/features/movies/presentation/ui/views/pages/settings_view.dart';
-import '/features/movies/presentation/ui/components/custom_list_card_widget.dart';
+import '/features/movies/presentation/ui/components/movie_card_widget.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({Key? key}) : super(key: key);
@@ -129,6 +129,7 @@ class _MoviesPageState extends State<MoviesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       // TODO NEXT FUTURE: develop the drawer with Title, About, and with Navigation Rail
       drawer: Container(),
       body: SafeArea(
@@ -137,10 +138,14 @@ class _MoviesPageState extends State<MoviesPage> {
           slivers: [
             _sliverLogoTMDB(),
             _sliverAppBarFloatingPersistentSearch(),
-            _sliverMoviesList(),
+            _sliverGridMoviesList(),
+            /*DeviceScreenInfoUtils.getFormFactor(context) == ScreenType.tablet
+                ? _sliverGridMoviesList()
+                : _sliverMoviesListHandSet(),*/
+
             const SliverToBoxAdapter(
               // Space to a FAB button as the height of AppBar + 8.0
-              child: SizedBox(height: kToolbarHeight + 8.0),
+              child: SizedBox(height: kToolbarHeight + 16.0),
             )
           ],
         ),
@@ -207,7 +212,7 @@ class _MoviesPageState extends State<MoviesPage> {
       pinned: _pinned,
       snap: _floating,
       floating: _floating,
-      toolbarHeight: 60.0,
+      toolbarHeight: 56.0,
       expandedHeight: 56.0,
       flexibleSpace: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -260,7 +265,7 @@ class _MoviesPageState extends State<MoviesPage> {
     );
   }
 
-// Mover para componentes
+// TODO Mover para componentes
   /// Layout to Handset
   Widget _sliverMoviesListHandSet() {
     return SliverToBoxAdapter(
@@ -275,8 +280,8 @@ class _MoviesPageState extends State<MoviesPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: movies.listMovies.length,
-                  itemBuilder: (_, idx) => CustomListCardWidget(
-                    movie: movies.listMovies[idx],
+                  itemBuilder: (_, index) => MovieCardWidget(
+                    movie: movies.listMovies[index],
                   ),
                 )
               // Shows a loader
@@ -289,22 +294,34 @@ class _MoviesPageState extends State<MoviesPage> {
   }
 
   /// Layout to Tablet
-  Widget _sliverMoviesList() {
+  Widget _sliverGridMoviesList() {
     return SliverToBoxAdapter(
       // Glue the MoviesController in the ListView
       child: ValueListenableBuilder<MovieEntity?>(
         valueListenable: _controller.movies,
         builder: (_, movies, __) {
           return movies != null
-              // TODO arranjar outra solução para ListView ter performance na memória
-              ? ListView.builder(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: movies.listMovies.length,
-                  itemBuilder: (_, idx) => CustomListCardWidget(
-                    movie: movies.listMovies[idx],
-                  ),
+              ? OrientationBuilder(
+                  builder: (context, orientation) {
+                    return GridView.count(
+                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount:
+                          orientation == Orientation.portrait ? 1 : 2,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                      childAspectRatio: 5 / 3,
+                      children: List.generate(
+                        movies.listMovies.length,
+                        (index) {
+                          return MovieCardWidget(
+                            movie: movies.listMovies[index],
+                          );
+                        },
+                      ),
+                    );
+                  },
                 )
               // Shows a loader
               : _fetchError
