@@ -1,3 +1,10 @@
+/*
+movies_page.dart
+@author Sérgio Henrique D. de Oliveira
+@version 1.0.70
+*/
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,6 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
 
+import '/core/utils/device_screen_info_utils.dart';
 import '/features/movies/domain/entities/movie_entity.dart';
 import '/features/movies/presentation/controllers/movies_controller.dart';
 import '/features/movies/presentation/ui/views/pages/settings_view.dart';
@@ -27,10 +35,11 @@ class _MoviesPageState extends State<MoviesPage> {
   late ScrollController _scrollControler;
 
   // TODO mudar variáveis para settings view e incluir no services e no controller
+  /// Controls Floating Search-Bar behavior
   final bool _pinned = false;
   final bool _floating = true;
 
-// FAB Animation
+  /// FAB Animation
   final duration = const Duration(milliseconds: 300);
   var _showScrollFAB = false;
   var _isScrollToTopEnabled = false;
@@ -44,6 +53,7 @@ class _MoviesPageState extends State<MoviesPage> {
   }
 
   // TODO FUTURE: Create a state to represent WITHOUT A INTERNET CONNECTION on bloc provider
+  // TODO FUTURE: Create a state to represent LOADING FROM API on bloc provider
   void _fethMovies() async {
     var e = await _controller.fetch();
 
@@ -87,7 +97,7 @@ class _MoviesPageState extends State<MoviesPage> {
         /// Arrow UP
         _isScrollToTopEnabled = true;
       } else {
-        /// Reverse == scroll bar to Bottom
+        /// Reverse == scrollbar to Bottom
         if (_scrollControler.position.userScrollDirection ==
             ScrollDirection.reverse) {
           /// Scrolling to Bottom
@@ -126,8 +136,63 @@ class _MoviesPageState extends State<MoviesPage> {
     super.dispose();
   }
 
+  /// Returns the number of columns depending on the screen size
+  int getNumberOfGridColumns(BuildContext context) {
+    int columnsPortrait = 1;
+    int columnsLandscape = 2;
+
+    var screen = DeviceScreenInfoUtils.getScreenSize(context);
+
+    switch (screen) {
+      case ScreenSize.small:
+        columnsPortrait = 1;
+        columnsLandscape = 1;
+        break;
+      case ScreenSize.normal:
+        columnsPortrait = 1;
+        columnsLandscape = 2;
+        break;
+      case ScreenSize.large:
+      case ScreenSize.hd:
+        columnsPortrait = 2;
+        columnsLandscape = 2;
+        break;
+      case ScreenSize.extraLarge:
+        columnsPortrait = 2;
+        columnsLandscape = 3;
+        break;
+      case ScreenSize.fHD:
+        columnsPortrait = 3;
+        columnsLandscape = 4;
+        break;
+      case ScreenSize.uHD4k:
+        columnsPortrait = 4;
+        columnsLandscape = 5;
+        break;
+      case ScreenSize.uHD8k:
+        columnsPortrait = 5;
+        columnsLandscape = 6;
+        break;
+      default:
+        columnsPortrait = 1;
+        columnsLandscape = 2;
+    }
+
+    if (kDebugMode) {
+      MediaQuery.of(context).orientation == Orientation.portrait
+          ? print("RETRATO: " + columnsPortrait.toString())
+          : print("PAISAGEM: " + columnsLandscape.toString());
+      print(screen.toString());
+    }
+
+    return MediaQuery.of(context).orientation == Orientation.portrait
+        ? columnsPortrait
+        : columnsLandscape;
+  }
+
   @override
   Widget build(BuildContext context) {
+    /// If a large screen increase the number of columns
     return Scaffold(
       extendBody: true,
       // TODO NEXT FUTURE: develop the drawer with Title, About, and with Navigation Rail
@@ -139,10 +204,6 @@ class _MoviesPageState extends State<MoviesPage> {
             _sliverLogoTMDB(),
             _sliverAppBarFloatingPersistentSearch(),
             _sliverGridMoviesList(),
-            /*DeviceScreenInfoUtils.getFormFactor(context) == ScreenType.tablet
-                ? _sliverGridMoviesList()
-                : _sliverMoviesListHandSet(),*/
-
             const SliverToBoxAdapter(
               // Space to a FAB button as the height of AppBar + 8.0
               child: SizedBox(height: kToolbarHeight + 16.0),
@@ -154,7 +215,7 @@ class _MoviesPageState extends State<MoviesPage> {
     );
   }
 
-  /// Scroll Up Floating Action Buttons
+  /// Scroll Up Floating Action Button
   Widget _floatingActionButtonScrollUp() {
     return AnimatedSlide(
       duration: duration,
@@ -307,8 +368,7 @@ class _MoviesPageState extends State<MoviesPage> {
                       padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      crossAxisCount:
-                          orientation == Orientation.portrait ? 1 : 2,
+                      crossAxisCount: getNumberOfGridColumns(context),
                       mainAxisSpacing: 0,
                       crossAxisSpacing: 0,
                       childAspectRatio: 5 / 3,

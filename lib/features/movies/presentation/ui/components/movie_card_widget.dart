@@ -1,3 +1,9 @@
+/*
+movie_card_widget.dart
+@author Sérgio Henrique D. de Oliveira
+@version 1.0.2
+*/
+
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,7 +13,6 @@ import '/core/utils/api_utils.dart';
 import '/features/movies/domain/entities/movie_details_entity.dart';
 import '/features/movies/presentation/ui/views/pages/details_page/details_page.dart';
 
-
 /// Shows a movie card with the data from [movie]
 ///
 ///     | Movie Card Widget -------------|
@@ -15,11 +20,11 @@ import '/features/movies/presentation/ui/views/pages/details_page/details_page.d
 ///     | LEFT Fragment | RIGHT Fragment |
 ///     |               |                |
 ///     |--------------------------------|
-/// 
+///
 /// This layout doesn't change between screens, only the density.
 /// The parent layout that calls this widget must show more or less cards,
 /// depending on the screen size.
-/// 
+///
 ////////////////////////////////////////////////////////////////////////////
 class MovieCardWidget extends StatelessWidget {
   final MovieDetailsEntity movie;
@@ -77,7 +82,6 @@ class MovieCardWidget extends StatelessWidget {
       color: Theme.of(context).cardTheme.color,
       child: Hero(
         tag: movie.id,
-
         /// From package cached_network_image
         child: CachedNetworkImage(
           /// Builds the poster
@@ -106,7 +110,7 @@ class MovieCardWidget extends StatelessWidget {
               ),
             ),
           ),
-
+      
           /// If the poster is not available show a Error icon
           errorWidget: (context, url, error) {
             return AspectRatio(
@@ -122,7 +126,7 @@ class MovieCardWidget extends StatelessWidget {
               ),
             );
           },
-
+      
           /// When is loading shows a loader animation
           placeholder: (context, url) => AspectRatio(
             aspectRatio: 2 / 3,
@@ -169,6 +173,7 @@ class MovieCardWidget extends StatelessWidget {
               softWrap: false,
               overflow: TextOverflow.fade,
             ),
+
             /// Original Title + (Released Year)
             Text(
               movie.originalTitle.toString() +
@@ -179,12 +184,14 @@ class MovieCardWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
+
             /// Popularity
             _dataRow(
               context,
               AppLocalizations.of(context)!.popularity,
               movie.popularity.toString(),
             ),
+
             /// Ratting
             _dataRow(
               context,
@@ -194,6 +201,7 @@ class MovieCardWidget extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
+
             /// App specifics, Favorite Button and See More Chip
             Align(
               alignment: Alignment.bottomRight,

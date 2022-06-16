@@ -1,3 +1,10 @@
+/*
+details_page.dart
+@author Sérgio Henrique D. de Oliveira
+@version 1.0.4
+@date 2022-06-15T14:20:40.4027916-03:00
+*/
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,7 +24,6 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // TODO maybe future localization var section: var txt_synopsis = AppLocalizations.of(context)!.synopsis;
 
     return Scaffold(
@@ -47,10 +53,14 @@ class DetailsPage extends StatelessWidget {
 
   /// FRAGMENT: Left Side of the page: Movie Poster
   Widget _fragmentHeroPoster() {
-    return Hero(
-      tag: movie.id,
-      child: CachedNetworkImage(
-        imageUrl: API.requestImg(movie.posterPath),
+    return InteractiveViewer(
+      minScale: 1.0,
+      maxScale: 2.0,
+      child: Hero(
+        tag: movie.id,
+        child: CachedNetworkImage(
+          imageUrl: API.requestImg(movie.posterPath),
+        ),
       ),
     );
   }
@@ -101,7 +111,6 @@ class DetailsPage extends StatelessWidget {
 
   /// FRAGMENT: Right/bottom side of the page: Movie Information
   Widget _fragmentMovieInfo(BuildContext context) {
-
     // Max-with of the synopsis text: 33% of the longest side on landscape
     var maxWidthInfo = double.infinity;
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
