@@ -1,4 +1,24 @@
 {
+  "files.exclude": {
+    "**/.idea": true,
+    "**/.dart_tool": true,
+    "**/.metadata": true,
+    "**/.packages": true,
+    "**/RESOURCES": true,
+    "**/build": true,
+    "**/*.iml": true,
+    "*.flutter-plugins*": true,
+    "**/.vscode": true,
+    "**/lib_BACKUP": true,
+    "*.zip": true,
+    "*.7zip": true,
+    "*.bat": true,
+    "*.ps1": true,
+  },
+  "cSpell.enableFiletypes": [
+    "!yaml",
+    "!dart"
+  ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#2e7f5b",
     "activityBar.activeBorder": "#542a75",
@@ -21,11 +41,13 @@
   },
   "peacock.color": "#3ba576",
   "saveAndRun": {
-    "commands": [{
-      "match": ".dart",
-      "cmd": "increase_version -i=${file}",
-      "useShortcut": false,
-      "silent": true
-    }]
+    "commands": [
+      {
+        "match": ".dart",
+        "cmd": "increase_version -i=${file}",
+        "useShortcut": false,
+        "silent": true
+      }
+    ]
   }
 }
