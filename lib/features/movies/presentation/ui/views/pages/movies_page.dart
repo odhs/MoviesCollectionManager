@@ -1,7 +1,7 @@
 /*
 movies_page.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.70
+@version 1.0.76
 */
 
 import 'package:flutter/foundation.dart';
@@ -92,6 +92,7 @@ class _MoviesPageState extends State<MoviesPage> {
         );
       }
 
+      /// Indicates the direction of the FAB arrow and the correlate function
       if (_scrollControler.position.pixels >=
           _scrollControler.position.maxScrollExtent) {
         /// Arrow UP
@@ -327,34 +328,8 @@ class _MoviesPageState extends State<MoviesPage> {
   }
 
 // TODO Mover para componentes
-  /// Layout to Handset
-  Widget _sliverMoviesListHandSet() {
-    return SliverToBoxAdapter(
-      // Glue the MoviesController in the ListView
-      child: ValueListenableBuilder<MovieEntity?>(
-        valueListenable: _controller.movies,
-        builder: (_, movies, __) {
-          return movies != null
-              // TODO arranjar outra solução para ListView ter performance na memória
-              ? ListView.builder(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: movies.listMovies.length,
-                  itemBuilder: (_, index) => MovieCardWidget(
-                    movie: movies.listMovies[index],
-                  ),
-                )
-              // Shows a loader
-              : _fetchError
-                  ? _noInternetConnectionMessage()
-                  : Lottie.asset('assets/lottie.json', repeat: true);
-        },
-      ),
-    );
-  }
 
-  /// Layout to Tablet
+  /// Grid Layout
   Widget _sliverGridMoviesList() {
     return SliverToBoxAdapter(
       // Glue the MoviesController in the ListView
