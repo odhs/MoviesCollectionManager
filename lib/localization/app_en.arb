@@ -14,23 +14,24 @@
   "@ratting": {
     "description": "Details Page Label"
   },
-  "account": "account",
-  "appTitle": "Movies List Manager",
-  "collections": "Collections",
-  "movies": "Movies",
-  "popularity": "Popularity",
-  "ratting": "Ratting",
-  "numberOfComments": "Number of Comments",
-  "accountType": "account Type",
-  "synopsis": "Synopsis",
-  "username": "Username",
-  "email": "Email",
-  "systemTheme": "System",
-  "lightTheme": "Light",
-  "darkTheme": "Dark",
   "@seeMore": {
     "description": "Details page button in card See More"
   },
+  "account": "account",
+  "accountType": "account Type",
+  "appTitle": "Movies List Manager",
+  "collections": "Collections",
+  "darkTheme": "Dark",
+  "email": "Email",
+  "lightTheme": "Light",
+  "movies": "Movies",
+  "numberOfComments": "Number of Comments",
+  "popularity": "Popularity",
+  "ratting": "Ratting",
+  "searchAMovie": "Search a movie",
   "seeMore": "See more",
-  "searchAMovie": "Search a movie"
+  "settings": "Settings",
+  "synopsis": "Synopsis",
+  "systemTheme": "System",
+  "username": "Username"
 }
