@@ -1,7 +1,7 @@
 /*
 movies_page.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.76
+@version 1.0.97
 */
 
 import 'package:flutter/foundation.dart';
@@ -202,12 +202,16 @@ class _MoviesPageState extends State<MoviesPage> {
         child: CustomScrollView(
           controller: _scrollControler,
           slivers: [
-            _sliverLogoTMDB(),
+            MediaQuery.of(context).orientation == Orientation.portrait
+                ? _sliverLogoTMDB()
+                : SliverToBoxAdapter(
+                    child: Container(height: 8,),
+                  ),
             _sliverAppBarFloatingPersistentSearch(),
             _sliverGridMoviesList(),
             const SliverToBoxAdapter(
               // Space to a FAB button as the height of AppBar + 8.0
-              child: SizedBox(height: kToolbarHeight + 16.0),
+              child: SizedBox(height: kToolbarHeight + 8.0),
             )
           ],
         ),

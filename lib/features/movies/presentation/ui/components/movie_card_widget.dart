@@ -1,7 +1,7 @@
 /*
 movie_card_widget.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.2
+@version 1.0.22
 */
 
 import 'package:flutter/material.dart';
@@ -82,6 +82,7 @@ class MovieCardWidget extends StatelessWidget {
       color: Theme.of(context).cardTheme.color,
       child: Hero(
         tag: movie.id,
+
         /// From package cached_network_image
         child: CachedNetworkImage(
           /// Builds the poster
@@ -110,7 +111,7 @@ class MovieCardWidget extends StatelessWidget {
               ),
             ),
           ),
-      
+
           /// If the poster is not available show a Error icon
           errorWidget: (context, url, error) {
             return AspectRatio(
@@ -126,7 +127,7 @@ class MovieCardWidget extends StatelessWidget {
               ),
             );
           },
-      
+
           /// When is loading shows a loader animation
           placeholder: (context, url) => AspectRatio(
             aspectRatio: 2 / 3,
@@ -162,7 +163,7 @@ class MovieCardWidget extends StatelessWidget {
   Widget _movieDataFragmentRight(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -174,15 +175,17 @@ class MovieCardWidget extends StatelessWidget {
               overflow: TextOverflow.fade,
             ),
 
-            /// Original Title + (Released Year)
+            /// Original Title
             Text(
-              movie.originalTitle.toString() +
-                  ' (' +
-                  movie.releaseDate.substring(0, 4) +
-                  ')',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              movie.originalTitle.toString(),
+              maxLines: 1,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
+
+            /// Year
+            Text(movie.releaseDate.substring(0, 4)),
+
             const Spacer(),
 
             /// Popularity
@@ -199,7 +202,7 @@ class MovieCardWidget extends StatelessWidget {
               movie.voteAverage.toString(),
             ),
             const SizedBox(
-              height: 8,
+              height: 4,
             ),
 
             /// App specifics, Favorite Button and See More Chip
@@ -212,12 +215,16 @@ class MovieCardWidget extends StatelessWidget {
                 alignment: WrapAlignment.end,
                 children: [
                   IconButton(
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: () {},
                     icon: const Icon(Icons.star_border_outlined),
                   ),
-                  Chip(
-                    avatar: const Icon(Icons.chevron_right_rounded),
-                    label: Text(AppLocalizations.of(context)!.seeMore),
+                  Text(
+                    AppLocalizations.of(context)!.seeMore.toUpperCase(),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
