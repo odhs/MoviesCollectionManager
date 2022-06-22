@@ -1,7 +1,7 @@
 /*
 movies_page.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.97
+@version 1.0.145
 */
 
 import 'package:flutter/foundation.dart';
@@ -199,24 +199,63 @@ class _MoviesPageState extends State<MoviesPage> {
       // TODO NEXT FUTURE: develop the drawer with Title, About, and with Navigation Rail
       drawer: Container(),
       body: SafeArea(
-        child: CustomScrollView(
-          controller: _scrollControler,
-          slivers: [
-            MediaQuery.of(context).orientation == Orientation.portrait
-                ? _sliverLogoTMDB()
-                : SliverToBoxAdapter(
-                    child: Container(height: 8,),
-                  ),
-            _sliverAppBarFloatingPersistentSearch(),
-            _sliverGridMoviesList(),
-            const SliverToBoxAdapter(
-              // Space to a FAB button as the height of AppBar + 8.0
-              child: SizedBox(height: kToolbarHeight + 8.0),
-            )
-          ],
-        ),
+        child: MediaQuery.of(context).orientation == Orientation.portrait
+            ? _phoneLayout()
+            : _largeLayout(),
       ),
       floatingActionButton: _floatingActionButtonScrollUp(),
+    );
+  }
+
+  Widget _largeLayout() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        /// reserved to a widget,
+        Expanded(
+          child: CustomScrollView(
+            controller: _scrollControler,
+            slivers: [
+              MediaQuery.of(context).orientation == Orientation.portrait
+                  ? _sliverLogoTMDB()
+                  : const SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 8,
+                      ),
+                    ),
+              _sliverAppBarFloatingPersistentSearch(true, true),
+              _sliverGridMoviesList(),
+              const SliverToBoxAdapter(
+                // Space to a FAB button as the height of AppBar + 8.0
+                child: SizedBox(height: kToolbarHeight + 8.0),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _phoneLayout() {
+    return CustomScrollView(
+      controller: _scrollControler,
+      slivers: [
+        MediaQuery.of(context).orientation == Orientation.portrait
+            ? _sliverLogoTMDB()
+            : const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 8,
+                ),
+              ),
+        _sliverAppBarFloatingPersistentSearch(_pinned, _floating),
+        _sliverGridMoviesList(),
+        const SliverToBoxAdapter(
+          // Space to a FAB button as the height of AppBar + 8.0
+          child: SizedBox(height: kToolbarHeight + 8.0),
+        )
+      ],
     );
   }
 
@@ -268,16 +307,31 @@ class _MoviesPageState extends State<MoviesPage> {
     );
   }
 
+  Widget _LogoTMDB() {
+    return SizedBox(
+      height: 56,
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+        child: SvgPicture.asset(
+          color: Theme.of(context).colorScheme.inverseSurface,
+          'assets/tmdb-logo.svg',
+          semanticsLabel: 'TMDB logo',
+        ),
+      ),
+    );
+  }
+
   /// Persistent Search Floating App Bar
   // TODO move to components
-  Widget _sliverAppBarFloatingPersistentSearch() {
+  Widget _sliverAppBarFloatingPersistentSearch(bool pinned, bool floating) {
     return SliverAppBar(
       leading: Container(),
       scrolledUnderElevation: 0.0,
       backgroundColor: Colors.transparent,
-      pinned: _pinned,
-      snap: _floating,
-      floating: _floating,
+      pinned: pinned,
+      snap: floating,
+      floating: floating,
       toolbarHeight: 56.0,
       expandedHeight: 56.0,
       flexibleSpace: Padding(

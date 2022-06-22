@@ -1,7 +1,7 @@
 /*
 navigation_page.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.19
+@version 1.0.30
 */
 
 import 'package:flutter/material.dart';
@@ -33,41 +33,56 @@ class _NavigationPageState extends State<NavigationPage> {
     const AccountPage(),
   ];
 
+  /// NavigationBar/Rail Icons
+  Widget iconMovies = const Icon(Icons.movie_filter_outlined);
+  Widget iconMoviesSel = const Icon(Icons.movie_creation_rounded);
+
+  Widget iconCollections = const Icon(Icons.video_library_outlined);
+  Widget iconCollectionsSel = const Icon(Icons.video_library_rounded);
+
+  Widget iconAccount = const Icon(Icons.account_circle_outlined);
+  Widget iconAccountSel = const Icon(Icons.account_circle_rounded);
+
   @override
   Widget build(BuildContext context) {
-    List<NavigationDestination> destinations = [
+    /// NavigationBar Button Labels
+    String strMovies = AppLocalizations.of(context)!.movies;
+    String strCollections = AppLocalizations.of(context)!.collections;
+    String strAccount = AppLocalizations.of(context)!.account;
+
+    List<NavigationDestination> bottomNavigationBarDestinations = [
       NavigationDestination(
-        icon: const Icon(Icons.movie_filter_outlined),
-        label: AppLocalizations.of(context)!.movies,
-        selectedIcon: const Icon(Icons.movie_creation_rounded),
+        icon: iconMovies,
+        label: strMovies,
+        selectedIcon: iconMoviesSel,
       ),
       NavigationDestination(
-        icon: const Icon(Icons.video_library_outlined),
-        label: AppLocalizations.of(context)!.collections,
-        selectedIcon: const Icon(Icons.video_library_rounded),
+        icon: iconCollections,
+        label: strCollections,
+        selectedIcon: iconCollectionsSel,
       ),
       NavigationDestination(
-        icon: const Icon(Icons.account_circle_outlined),
-        label: AppLocalizations.of(context)!.account,
-        selectedIcon: const Icon(Icons.account_circle_rounded),
+        icon: iconAccount,
+        label: strAccount,
+        selectedIcon: iconAccountSel,
       ),
     ];
 
-    List<NavigationRailDestination> destinationsRail = [
+    List<NavigationRailDestination> navigationRailDestinations = [
       NavigationRailDestination(
-        icon: const Icon(Icons.movie_filter_outlined),
-        label: Text(AppLocalizations.of(context)!.movies),
-        selectedIcon: const Icon(Icons.movie_creation_rounded),
+        icon: iconMovies,
+        label: Text(strMovies),
+        selectedIcon: iconMoviesSel,
       ),
       NavigationRailDestination(
-        icon: const Icon(Icons.video_library_outlined),
-        label: Text(AppLocalizations.of(context)!.collections),
-        selectedIcon: const Icon(Icons.video_library_rounded),
+        icon: iconCollections,
+        label: Text(strCollections),
+        selectedIcon: iconCollectionsSel,
       ),
       NavigationRailDestination(
-        icon: const Icon(Icons.account_circle_outlined),
-        label: Text(AppLocalizations.of(context)!.account),
-        selectedIcon: const Icon(Icons.account_circle_rounded),
+        icon: iconAccount,
+        label: Text(strAccount),
+        selectedIcon: iconAccountSel,
       ),
     ];
 
@@ -87,6 +102,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 ? NavigationRail(
                     /// Center the buttons vertically
                     groupAlignment: -0.2,
+
                     /// Shows a logo
                     leading: SizedBox(
                       height: navigationRailIconSize,
@@ -102,7 +118,7 @@ class _NavigationPageState extends State<NavigationPage> {
                     ),
                     backgroundColor:
                         Theme.of(context).colorScheme.onInverseSurface,
-                    // TODO inverter as dependecias e colocar como parametro o DeviceScreenInfoUtils para determinar o width
+                    // TODO inverter as dependencias e colocar como parametro o DeviceScreenInfoUtils para determinar o width
                     minWidth: navigationRailIconSize,
                     selectedIndex: _tabselected,
                     labelType: NavigationRailLabelType.all,
@@ -111,7 +127,7 @@ class _NavigationPageState extends State<NavigationPage> {
                         _tabselected = index;
                       });
                     },
-                    destinations: destinationsRail,
+                    destinations: navigationRailDestinations,
                   )
                 : Container(),
             Expanded(
@@ -139,7 +155,7 @@ class _NavigationPageState extends State<NavigationPage> {
                       _tabselected = index;
                     });
                   },
-                  destinations: destinations,
+                  destinations: bottomNavigationBarDestinations,
                 ),
               )
             : null,
