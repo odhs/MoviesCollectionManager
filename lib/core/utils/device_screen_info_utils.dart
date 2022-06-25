@@ -1,7 +1,7 @@
 /*
 device_screen_info_utils.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.12
+@version 1.0.17
 */
 
 import 'dart:io' show Platform;
@@ -118,6 +118,10 @@ class DeviceScreenInfoUtils {
     if (deviceWidth >= DeviceScreenInfoUtils.tablet) return ScreenType.tablet;
     if (deviceWidth >= DeviceScreenInfoUtils.handset) return ScreenType.handset;
     return ScreenType.watch;
+  }
+
+  static double getWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
   }
 
   /// Get the size based on context

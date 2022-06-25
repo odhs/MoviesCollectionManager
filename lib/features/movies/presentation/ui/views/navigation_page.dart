@@ -1,13 +1,12 @@
 /*
 navigation_page.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.30
+@version 1.0.34
 */
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:movieapp/core/utils/device_screen_info_utils.dart';
 
 import '/features/movies/presentation/ui/views/pages/account_page.dart';
@@ -104,11 +103,16 @@ class _NavigationPageState extends State<NavigationPage> {
                     groupAlignment: -0.2,
 
                     /// Shows a logo
-                    leading: SizedBox(
+                    leading: IconButton(
+                      icon: const Icon(Icons.menu_rounded),
+                      onPressed: () {},
+                    ),
+                    /*
+                    SizedBox(
                       height: navigationRailIconSize,
                       width: navigationRailIconSize,
                       child: Padding(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                         child: SvgPicture.asset(
                           color: Theme.of(context).colorScheme.inverseSurface,
                           'assets/tmdb-logo_square.svg',
@@ -116,6 +120,8 @@ class _NavigationPageState extends State<NavigationPage> {
                         ),
                       ),
                     ),
+
+                    */
                     backgroundColor:
                         Theme.of(context).colorScheme.onInverseSurface,
                     // TODO inverter as dependencias e colocar como parametro o DeviceScreenInfoUtils para determinar o width

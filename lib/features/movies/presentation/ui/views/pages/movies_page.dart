@@ -1,7 +1,7 @@
 /*
 movies_page.dart
 @author Sérgio Henrique D. de Oliveira
-@version 1.0.145
+@version 1.0.226
 */
 
 import 'package:flutter/foundation.dart';
@@ -199,12 +199,24 @@ class _MoviesPageState extends State<MoviesPage> {
       // TODO NEXT FUTURE: develop the drawer with Title, About, and with Navigation Rail
       drawer: Container(),
       body: SafeArea(
-        child: MediaQuery.of(context).orientation == Orientation.portrait
-            ? _phoneLayout()
-            : _largeLayout(),
+        child: layoutSelector(context),
       ),
       floatingActionButton: _floatingActionButtonScrollUp(),
     );
+  }
+
+  Widget layoutSelector(BuildContext context) {
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
+    if (!isPortrait) {
+      if (DeviceScreenInfoUtils.getWidth(context) >=
+          DeviceScreenInfoUtils.large) {
+        return _largeLayout();
+      }
+    }
+
+    return _phoneLayout();
   }
 
   Widget _largeLayout() {
@@ -213,7 +225,77 @@ class _MoviesPageState extends State<MoviesPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        /// reserved to a widget,
+        // TODO MOVER PARA COMPONENTES
+        AppBar(
+          // no menu icon
+          automaticallyImplyLeading: false,
+          elevation: 1.0,
+          titleSpacing: 20.0,
+          centerTitle: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _LogoTMDB(),
+              ValueListenableBuilder<MovieEntity?>(
+                valueListenable: _controller.movies,
+                builder: (__, movies, _) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 360,
+                      height: 40,
+                      child: TextField(
+                        enabled: movies != null,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                        onChanged: _controller.onChanged,
+                        decoration: InputDecoration(
+                          suffixIcon: const Icon(Icons.search),
+                          //prefixIcon: const Icon(Icons.search),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          filled: true,
+                          hintText: AppLocalizations.of(context)!.searchAMovie,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.refresh_rounded),
+            ),
+            IconButton(
+              icon: const Icon(Icons.filter_alt),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.restorablePushNamed(context, SettingsView.routeName);
+              },
+            ),
+          ],
+        ),
+/*             const SizedBox(
+              height: 20,
+              width: 20,
+            ), */
+
         Expanded(
           child: CustomScrollView(
             controller: _scrollControler,
@@ -225,7 +307,10 @@ class _MoviesPageState extends State<MoviesPage> {
                         height: 8,
                       ),
                     ),
-              _sliverAppBarFloatingPersistentSearch(true, true),
+              DeviceScreenInfoUtils.getWidth(context) <
+                      DeviceScreenInfoUtils.large
+                  ? _sliverAppBarFloatingPersistentSearch(true, true)
+                  : SliverToBoxAdapter(child: Container()),
               _sliverGridMoviesList(),
               const SliverToBoxAdapter(
                 // Space to a FAB button as the height of AppBar + 8.0
@@ -309,15 +394,12 @@ class _MoviesPageState extends State<MoviesPage> {
 
   Widget _LogoTMDB() {
     return SizedBox(
-      height: 56,
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-        child: SvgPicture.asset(
-          color: Theme.of(context).colorScheme.inverseSurface,
-          'assets/tmdb-logo.svg',
-          semanticsLabel: 'TMDB logo',
-        ),
+      height: kToolbarHeight,
+      width: 200,
+      child: SvgPicture.asset(
+        color: Theme.of(context).colorScheme.inverseSurface,
+        'assets/tmdb-logo.svg',
+        semanticsLabel: 'TMDB logo',
       ),
     );
   }
