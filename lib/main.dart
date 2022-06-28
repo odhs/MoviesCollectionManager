@@ -23,7 +23,7 @@ void main() async {
   await settingsController.loadSettings();
 
   /// Visual Density to provide touch or click depends on device
-/// TODO implement density support
+  /// TODO implement density support
 /*
   double densityAmt = touchMode ? 0.0 : -1.0;
   VisualDensity density =
@@ -60,12 +60,16 @@ void main() async {
 
   /// If device is a Desktop set window propierties, less title.
   /// The window title is inside the AndroidApp, because it needs context.
+  ///
   if (DeviceScreenInfoUtils.isDesktop) {
     doWhenWindowReady(() {
       const initialSize = Size(400, 800);
       appWindow.minSize = initialSize;
       appWindow.size = initialSize;
       appWindow.alignment = Alignment.center;
+
+      /// title setted later
+      //win.title = "Movies Collection Manager";
       appWindow.show();
     });
   }

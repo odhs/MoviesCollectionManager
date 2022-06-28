@@ -1,3 +1,7 @@
+# PROJECT MOVED
+
+This project was moved to [GitLab](https://gitlab.com/shdo/MoviesCollectionManager) and next commits will be there first.
+
 # Movies Collection Manager
 
 Movies Collection Manager allows you to choose your movies and put them in collections, share with friends and see which streaming services contain the movies.

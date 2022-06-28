@@ -52,28 +52,29 @@ class AndroidApp extends StatelessWidget {
             Locale('pt', 'BR'),
           ],
 
-          // Use AppLocalizations to configure the correct application title
-          // depending on the user's locale.
-          //
-          // The appTitle is defined in .arb files found in the localization
-          // directory.
+          /// Use AppLocalizations to configure the correct application title
+          /// depending on the user's locale.
+          ///
+          /// The appTitle is defined in .arb files found in the localization
+          /// directory.
           onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.appTitle,
 
-          // Define a light and dark color theme. Then, read the user's
-          // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme.
+          /// Define a light and dark color theme. Then, read the user's
+          /// preferred ThemeMode (light, dark, or system default) from the
+          /// SettingsController to display the correct theme.
           theme: LightTheme.getTheme(),
           darkTheme: DarkTheme.getTheme(),
           themeMode: settingsController.themeMode,
 
-          // Define a function to handle named routes in order to support
-          // Flutter web url navigation and deep linking.
+          /// Define a function to handle named routes in order to support
+          /// Flutter web url navigation and deep linking.
+          /// For first page default is "/", and NavigationPage has named as "/"
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
-                // If the Title-Bar is supported define the name
+                /// If the Title-Bar is supported define the name
                 if (DeviceScreenInfoUtils.isDesktop) {
                   appWindow.title = AppLocalizations.of(context)!.appTitle;
                 }
